@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//nao estou utilizando devido ao tempo de espera que a funcao adiciona
 /*
-//funcao experimental e completamente desnecessária
+//simular carregamento na abertura do programa
 void inicializa ()
 {
 	int x, carregado = 0;
@@ -117,14 +118,85 @@ produto* cadastra_produto (produto *p, int *n)
 	return p;
 }
 
-//funcao para imprimir os produtos na tela
+void atualiza_produto (produto *p, int *n)
+{
+	int i, aux;
+	system("clear");
+	system("clear");
+    printf("Insira o Código ID do Produto: ");
+    scanf("%d", &aux);
+
+	for(i = 0; i < (*n); i++){
+		if (aux == p[i].id) {
+            printf(" Nome: %s\n", p[i].nome );
+    		printf(" Preco: RS %.2f\n", p[i].preco);
+            printf("\nInsira o novo Nome do Produto: ");
+            scanf("\n%50[^\n]", p[i].nome);
+            printf("Insira o novo Preço do Produto: ");
+    		scanf("%f", &p[i].preco);
+        }
+    }
+    printf("\n-----------------------\n");
+    printf("  Produto Atualizado!\n");
+    printf("-----------------------\n");
+	printf("\nPrecione ENTER para voltar\n");
+	getchar();
+	getchar();
+}
+
+produto* remove_produto(produto *p, int *n)
+ {
+     system("clear");
+
+     int i, aux;
+     printf("Insira o Código ID do Produto: ");
+     scanf("%d", &aux);
+     for (i = 0; i < (*n); i++) {
+         if (aux == p[i].id) {
+             printf(" Nome: %s\n", p[i].nome );
+     		 printf(" Preco: RS %.2f\n", p[i].preco);
+             p[i] = p[(*n) - 1];
+             p = (produto*) realloc(p, (*n-1) * sizeof(produto));
+         }
+    }
+    printf("\n-----------------------\n");
+    printf("  Produto Removido!\n");
+    printf("-----------------------\n");
+ 	printf("\nPrecione ENTER para voltar\n");
+ 	getchar();
+ 	getchar();
+     (*n)--;
+     return (p);
+}
+
+void consulta_produto (produto *p, int *n)
+{
+	int i, aux;
+	system("clear");
+	system("clear");
+    printf("Insira o Código ID do Produto: ");
+    scanf("%d", &aux);
+
+	for(i = 0; i < (*n); i++){
+		if (aux == p[i].id) {
+            printf(" Nome: %s\n", p[i].nome );
+    		printf(" Preco: RS %.2f\n", p[i].preco);
+        }
+    }
+    printf("-----------------------\n");
+	printf("\nPrecione ENTER para voltar\n");
+	getchar();
+	getchar();
+}
+
+//funcao para imprimir todos os produtos cadastrados
 void imprime_produtos (produto *p, int *n)
 {
 	int i;
 	system("clear");
 	system("clear");
-	printf("\t--LISTA DE PRODUTOS--\n\n-----------------------\n");
-	if ((*n) == 0) printf("Nenhum Produto Registrado!\n");
+	printf("\t--LISTA DE PRODUTOS--\n\n--------------------------\n");
+	if ((*n) == 0) printf("Nenhum Produto Registrado!\n--------------------------\n");
     	else{
         	for(i = 0; i < (*n); i++){
         		printf(" Id: %d\n", p[i].id);
@@ -136,30 +208,27 @@ void imprime_produtos (produto *p, int *n)
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
-
-
 }
 
 //funcao para imprimir o menu de opcoes
 void print_menu_principal ()
 {
-	printf("\t--MENU INICIAL--\t\t\t%s\n\n", __DATE__);
+	printf("\t--MENU INICIAL--\t%s\n\n", __DATE__);
 	printf(" [1] - Cadastrar Produto.\n");
-	//printf(" [] - Remover Produto.\n");
-	////printf(" [] - Atualizar Produto.\n");
-	////printf(" [] - Consultar Produto.\n");
-	printf(" [2] - Verificar Produtos Cadastrados.\n");
-	//printf(" [] - Abrir Caixa.\n");
-	//printf(" [] - Imprimir Relatorio de Vendas.\n");
-	printf(" [3] - Encerrar Programa.\n");
-
-	printf("\nO que deseja? \n");
+	printf(" [2] - Atualizar Produto.\n");
+	printf(" [3] - Remover Produto.\n");
+	printf(" [4] - Consultar Produto.\n");
+	printf(" [5] - Verificar Produtos Cadastrados.\n");
+	//printf(" [6] - Abrir Caixa.\n");
+	//printf(" [7] - Imprimir Relatorio de Vendas.\n");
+	printf(" [9] - Encerrar Programa.\n");
+	printf("\nO que deseja? ");
 }
 
 //funcao principal
 int main()
 {
-	int opcao, qtd = 0; //qtd = quantidade de produtos registrados
+	int opcao, qtd = 0;
 	produto *mercadoria = 0;
 
     //inicializa();
@@ -176,11 +245,23 @@ int main()
     			mercadoria = cadastra_produto(mercadoria, &qtd);
     			break;
 
-    		case 2 :
+            case 2 :
+        		atualiza_produto(mercadoria, &qtd);
+        		break;
+
+            case 3 :
+            	mercadoria = remove_produto(mercadoria, &qtd);
+            	break;
+
+            case 4 :
+        		consulta_produto(mercadoria, &qtd);
+        		break;
+
+    		case 5 :
     			imprime_produtos(mercadoria, &qtd);
     			break;
 
-    		case 3 :
+    		case 9 :
     			system("clear");
     			printf("Volte sempre!\n");
     			return 0;
