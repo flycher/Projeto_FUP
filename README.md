@@ -14,3 +14,5 @@ Sistema de supermercado
  ● Relatório de Vendas [ ]
  
  ● Salvar em Arquivo [ ]
+ 
+ 
