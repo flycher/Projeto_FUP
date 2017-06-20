@@ -86,7 +86,7 @@ void produto_para_arquivo(produto vetor[], int n)
 	fclose(f);
 }
 */
-//funcao para cadastrar os produtos
+//funcao para cadastra produto
 produto* cadastra_produto (produto *p, int *n)
 {
 	system("clear");
@@ -118,6 +118,7 @@ produto* cadastra_produto (produto *p, int *n)
 	return p;
 }
 
+//funcao para atualizar produto
 void atualiza_produto (produto *p, int *n)
 {
 	int i, aux;
@@ -144,6 +145,7 @@ void atualiza_produto (produto *p, int *n)
 	getchar();
 }
 
+//funcao para remover produto
 produto* remove_produto(produto *p, int *n)
  {
      system("clear");
@@ -169,6 +171,7 @@ produto* remove_produto(produto *p, int *n)
      return (p);
 }
 
+//funcao para consultar produto
 void consulta_produto (produto *p, int *n)
 {
 	int i, aux;
