@@ -41,10 +41,8 @@ produto* ler_lista_produtos_txt (produto *vetor, int *n)
 	FILE *f = fopen("ProdutosCadastrados.txt", "r");
 	if (f == 0) {
 		FILE *f = fopen("ProdutosCadastrados.txt", "w");
-        printf("** ERRO, Arquivo Inacessível! **");
-		f = f;
+        f = f;
 		return vetor;
-
 	}
 
 	while(fscanf(f, "%d\n%[^\n]\n%f\n", &auxiliar.id, auxiliar.nome, &auxiliar.preco) == 3) {
@@ -253,7 +251,7 @@ void consulta_produto (produto *p, int *n)
 			printf("\n-----------------------\n");
 			printf("Produto não Encontrado!\n");
 	}
-	
+
     printf("-----------------------\n");
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
@@ -289,18 +287,42 @@ void imprime_produtos (produto *p, int *n)
 }
 
 //funcao para imprimir o menu de opcoes
-void print_menu_principal ()
+void menu_principal ()
 {
+	system("clear");
+	system("clear");
 	printf("\t--MENU INICIAL--\t%s\n\n", __DATE__);
+	printf(" [1] - Controle de Produtos.\n");
+	printf(" [2] - Iniciar Compra.\n");
+	printf(" [3] - Imprimir Relatorio de Vendas.\n");
+	printf(" [9] - Encerrar Programa.\n");
+	printf("\nO que deseja? ");
+}
+
+void menu_produtos ()
+{
+	system("clear");
+	system("clear");
+	printf("\t--CONTROLE DE PRODUTOS--\t%s\n\n", __DATE__);
 	printf(" [1] - Cadastrar Produto.\n");
 	printf(" [2] - Atualizar Produto.\n");
 	printf(" [3] - Remover Produto.\n");
 	printf(" [4] - Consultar Produto.\n");
 	printf(" [5] - Verificar Produtos Cadastrados.\n");
-	//printf(" [6] - Abrir Caixa.\n");
-	//printf(" [7] - Imprimir Relatorio de Vendas.\n");
-	printf(" [9] - Encerrar Programa.\n");
+	printf(" [9] - Retornar ao Menu Inicial.\n");  //como retornar ao menu principal?
 	printf("\nO que deseja? ");
+}
+
+void em_construcao()
+{
+	system("clear");
+	system("clear");
+	printf("\n----------------------------\n");
+	printf("--Área em Desenvolvimento--");
+	printf("\n----------------------------\n");
+	printf("\nPrecione ENTER para voltar\n");
+	getchar();
+	getchar();
 }
 
 //funcao principal
@@ -314,43 +336,78 @@ int main()
 	mercadoria = ler_lista_produtos_txt(mercadoria, &qtd);
 
 	while (1) {
-    	system("clear");
-    	print_menu_principal();
+		system("clear");
+    	menu_principal();
     	scanf("%d", &opcao);
 
     	switch (opcao) {
-    		case 1 :
-    			mercadoria = cadastra_produto(mercadoria, &qtd);
-    			break;
+			case 1 :
+				while (1) {
+					system("clear");
+					menu_produtos();
+					scanf("%d", &opcao);
 
-            case 2 :
-        		atualiza_produto(mercadoria, &qtd);
-        		break;
+					switch (opcao) {
 
-            case 3 :
-            	mercadoria = remove_produto(mercadoria, &qtd);
-            	break;
+			    		case 1 :
+			    			mercadoria = cadastra_produto(mercadoria, &qtd);
+			    			break;
 
-            case 4 :
-        		consulta_produto(mercadoria, &qtd);
-        		break;
+			            case 2 :
+			        		atualiza_produto(mercadoria, &qtd);
+			        		break;
 
-    		case 5 :
-    			imprime_produtos(mercadoria, &qtd);
-    			break;
+			            case 3 :
+			            	mercadoria = remove_produto(mercadoria, &qtd);
+			            	break;
+
+			            case 4 :
+			        		consulta_produto(mercadoria, &qtd);
+			        		break;
+
+			    		case 5 :
+			    			imprime_produtos(mercadoria, &qtd);
+			    			break;
+
+						case 9 :
+							system("clear");
+							//vai fazer o programa carregar novamente, nao acho q seja uma boa opçao
+							//tentar pensar em uma alternativa
+							return main();
+				    		break;
+
+						default:
+					    	system("clear");
+					    	printf("\nOpção Inválida!\n");
+					    	printf("\nPrecione ENTER para voltar\n");
+					    	getchar();
+					    	getchar();
+
+					}
+				}
+
+			case 2 :
+				system("clear");
+				em_construcao();
+				break;
+
+			case 3 :
+				system("clear");
+				em_construcao();
+				break;
 
     		case 9 :
-    			system("clear");
+				system("clear");
     			printf("Volte sempre!\n");
     			return 0;
     			break;
 
     		default:
-    		system("clear");
-    		printf("\nOpção Inválida!\n");
-    		printf("\nPrecione ENTER para voltar\n");
-    		getchar();
-    		getchar();
+	    		system("clear");
+	    		printf("\nOpção Inválida!\n");
+	    		printf("\nPrecione ENTER para voltar\n");
+	    		getchar();
+	    		getchar();
 
     	}
     }

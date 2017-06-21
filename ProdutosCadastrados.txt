@@ -1,9 +1,15 @@
 1
-escova
-1.250000
+pasta de dente
+1.750000
 2
-pasta
-2.450000
+escova de dente
+2.500000
 3
 sabonete
 0.850000
+4
+shampoo
+7.250000
+27
+cafe instantaneo
+2.300000
