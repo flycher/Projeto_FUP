@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-//simular carregamento na abertura do programa
-void inicializa ()
+//simular carregamento na abertura do programa(nao essencial ao programa)
+void carregando()
 {
 	int x, carregado = 0;
 
@@ -55,12 +55,10 @@ produto* ler_lista_produtos_txt (produto *vetor, int *n)
     			if(vetor == 0) printf("Erro no realloc");
     		}
 
-    	vetor[i].id = auxiliar.id;
-    	strcpy(vetor[i].nome, auxiliar.nome);
-    	vetor[i].preco = auxiliar.preco;
+		vetor[i] = auxiliar;
     	i++;
     	(*n)++;
-    	}
+    }
 
 	return vetor;
 }
@@ -135,7 +133,9 @@ void atualiza_produto (produto *p, int *n)
 	 system("clear");
 
 	 if ((*n) == 0) {
-		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("--------------------------\n");
+		printf("Nenhum Produto Registrado!");
+		printf("\n--------------------------\n");
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -182,7 +182,9 @@ produto* remove_produto(produto *p, int *n)
 	 system("clear");
 
 	 if ((*n) == 0) {
-		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("--------------------------\n");
+ 		printf("Nenhum Produto Registrado!");
+ 		printf("\n--------------------------\n");
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -229,7 +231,9 @@ void consulta_produto (produto *p, int *n)
 	system("clear");
 
 	if ((*n) == 0) {
-		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("--------------------------\n");
+		printf("Nenhum Produto Registrado!");
+		printf("\n--------------------------\n");
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -266,7 +270,9 @@ void imprime_produtos (produto *p, int *n)
 	system("clear");
 
 	if ((*n) == 0) {
-		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("--------------------------\n");
+		printf("Nenhum Produto Registrado!");
+		printf("\n--------------------------\n");
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -286,7 +292,7 @@ void imprime_produtos (produto *p, int *n)
 	getchar();
 }
 
-//funcao para imprimir o menu de opcoes
+//funcao para imprimir o menu principal
 void menu_principal ()
 {
 	system("clear");
@@ -299,6 +305,7 @@ void menu_principal ()
 	printf("\nO que deseja? ");
 }
 
+//funcao para imprimir o menu de produtos
 void menu_produtos ()
 {
 	system("clear");
@@ -309,15 +316,16 @@ void menu_produtos ()
 	printf(" [3] - Remover Produto.\n");
 	printf(" [4] - Consultar Produto.\n");
 	printf(" [5] - Verificar Produtos Cadastrados.\n");
-	printf(" [9] - Retornar ao Menu Inicial.\n");  //como retornar ao menu principal?
+	printf(" [9] - Retornar ao Menu Inicial.\n");
 	printf("\nO que deseja? ");
 }
 
+//funcao para imprimir areas ainda nao implementadas
 void em_construcao()
 {
 	system("clear");
 	system("clear");
-	printf("\n----------------------------\n");
+	printf("----------------------------\n");
 	printf("--Área em Desenvolvimento--");
 	printf("\n----------------------------\n");
 	printf("\nPrecione ENTER para voltar\n");
@@ -331,7 +339,7 @@ int main()
 	int opcao, qtd = 0;
 	produto *mercadoria = 0;
 
-    //inicializa(); nao estou utilizando devido ao tempo de espera que a funcao adiciona
+    //carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
 
 	mercadoria = ler_lista_produtos_txt(mercadoria, &qtd);
 
@@ -372,7 +380,7 @@ int main()
 						case 9 :
 							system("clear");
 							//vai fazer o programa carregar novamente, nao acho q seja uma boa opçao
-							//tentar pensar em uma alternativa
+							//pensar em uma alternativa
 							return main();
 				    		break;
 
