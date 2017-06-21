@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//nao estou utilizando devido ao tempo de espera que a funcao adiciona
-/*
+
 //simular carregamento na abertura do programa
 void inicializa ()
 {
@@ -25,7 +24,7 @@ void inicializa ()
     }
 
 }
-*/
+
 //estrutura para dados dos produtos
 typedef struct{
     int id;
@@ -33,29 +32,29 @@ typedef struct{
     float preco;
 } produto;
 
-//funcoes para usar arquivo apresenta segmentation fault
-/*
 //funcao para ler os produtos ja cadastrados do arquivo
 produto* ler_lista_produtos_txt (produto *vetor, int *n)
 {
     int i = 0;
 	produto auxiliar;
+
 	FILE *f = fopen("ProdutosCadastrados.txt", "r");
 	if (f == 0) {
+		FILE *f = fopen("ProdutosCadastrados.txt", "w");
         printf("** ERRO, Arquivo Inacessível! **");
+		f = f;
+		return vetor;
+
 	}
 
 	while(fscanf(f, "%d\n%[^\n]\n%f\n", &auxiliar.id, auxiliar.nome, &auxiliar.preco) == 3) {
 
     	if ((*n) == 0) {
     		vetor = (produto*) malloc(sizeof(produto));
-            if(vetor == 0) {
-            printf("Erro no malloc");
+            if(vetor == 0) printf("Erro no malloc");
     	}	else {
     			vetor = (produto*) realloc(vetor, ((*n)+1) * sizeof(produto));
-    			if(vetor == 0) {
-    			printf("Erro no realloc");
-    			}
+    			if(vetor == 0) printf("Erro no realloc");
     		}
 
     	vetor[i].id = auxiliar.id;
@@ -64,7 +63,6 @@ produto* ler_lista_produtos_txt (produto *vetor, int *n)
     	i++;
     	(*n)++;
     	}
-    }
 
 	return vetor;
 }
@@ -85,22 +83,34 @@ void produto_para_arquivo(produto vetor[], int n)
 
 	fclose(f);
 }
-*/
+
 //funcao para cadastra produto
 produto* cadastra_produto (produto *p, int *n)
 {
 	system("clear");
 
+	int i;
 	produto auxiliar;
     printf("\t--CADASTRO DO PRODUTO--\n\n");
     printf("Insira a ID: ");
 	scanf(" %d", &auxiliar.id);
+
+	for (i = 0; i < (*n); i++) {
+		if (auxiliar.id == p[i].id) {
+			printf("\n-----------------------\n");
+			printf("Código ID já cadastrado!\n");
+			printf("-----------------------\n");
+			printf("\nPrecione ENTER para voltar\n");
+			getchar();
+			getchar();
+			return p;
+		}
+	}
+
 	printf("Insira o nome: ");
 	scanf(" %50[^\n]", auxiliar.nome);
 	printf("Insira o preco: ");
 	scanf(" %f", &auxiliar.preco);
-
-	//produto_para_arquivo(p, (*n));
 
 	if ((*n) == 0) {
 		p = (produto *) malloc(sizeof(produto));
@@ -109,19 +119,32 @@ produto* cadastra_produto (produto *p, int *n)
 			p = (produto *) realloc(p, ((*n)+1) * sizeof(produto) );
 			(*n)++;
 			if(p == 0){
-				printf("Erro no Relloc");
+				printf("Erro no Realloc");
 				return 0;
 			}
 		}
 
 	p[(*n) - 1] = auxiliar;
+	produto_para_arquivo(p, (*n));
+
 	return p;
 }
 
 //funcao para atualizar produto
 void atualiza_produto (produto *p, int *n)
 {
-	int i, aux;
+	 system("clear");
+	 system("clear");
+
+	 if ((*n) == 0) {
+		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("\nPrecione ENTER para voltar\n");
+		getchar();
+		getchar();
+		return ;
+	 }
+
+	int i, aux, cont = 0;
 	system("clear");
 	system("clear");
     printf("Insira o Código ID do Produto: ");
@@ -135,10 +158,19 @@ void atualiza_produto (produto *p, int *n)
             scanf("\n%50[^\n]", p[i].nome);
             printf("Insira o novo Preço do Produto: ");
     		scanf("%f", &p[i].preco);
-        }
+    		cont++;
+    	}
     }
-    printf("\n-----------------------\n");
-    printf("  Produto Atualizado!\n");
+
+    produto_para_arquivo(p, (*n));
+
+    if (cont == 0) {
+			printf("\n-----------------------\n");
+			printf("Produto não Encontrado!\n");
+	}	else {
+		printf("\n-----------------------\n");
+		printf("  Produto Atualizado!\n");
+		}
     printf("-----------------------\n");
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
@@ -149,8 +181,17 @@ void atualiza_produto (produto *p, int *n)
 produto* remove_produto(produto *p, int *n)
  {
      system("clear");
+	 system("clear");
 
-     int i, aux;
+	 if ((*n) == 0) {
+		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("\nPrecione ENTER para voltar\n");
+		getchar();
+		getchar();
+		return (p);
+	 }
+
+     int i, aux, cont = 0;
      printf("Insira o Código ID do Produto: ");
      scanf("%d", &aux);
      for (i = 0; i < (*n); i++) {
@@ -159,24 +200,44 @@ produto* remove_produto(produto *p, int *n)
      		 printf(" Preco: RS %.2f\n", p[i].preco);
              p[i] = p[(*n) - 1];
              p = (produto*) realloc(p, (*n-1) * sizeof(produto));
+             cont++;
          }
     }
-    printf("\n-----------------------\n");
-    printf("  Produto Removido!\n");
+
+    if (cont == 0) {
+			printf("\n-----------------------\n");
+			printf("Produto não Encontrado!\n");
+	}	else {
+		printf("\n-----------------------\n");
+		printf("  Produto Removido!\n");
+		}
     printf("-----------------------\n");
  	printf("\nPrecione ENTER para voltar\n");
  	getchar();
  	getchar();
-     (*n)--;
+    (*n)--;
+
+    produto_para_arquivo(p, (*n));
+
      return (p);
 }
 
 //funcao para consultar produto
 void consulta_produto (produto *p, int *n)
 {
-	int i, aux;
+
+	int i, aux, cont = 0;
 	system("clear");
 	system("clear");
+
+	if ((*n) == 0) {
+		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("\nPrecione ENTER para voltar\n");
+		getchar();
+		getchar();
+		return;
+	}
+
     printf("Insira o Código ID do Produto: ");
     scanf("%d", &aux);
 
@@ -184,8 +245,15 @@ void consulta_produto (produto *p, int *n)
 		if (aux == p[i].id) {
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
+    		cont++;
         }
     }
+
+    if (cont == 0) {
+			printf("\n-----------------------\n");
+			printf("Produto não Encontrado!\n");
+	}
+	
     printf("-----------------------\n");
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
@@ -198,16 +266,23 @@ void imprime_produtos (produto *p, int *n)
 	int i;
 	system("clear");
 	system("clear");
+
+	if ((*n) == 0) {
+		printf("Nenhum Produto Registrado!\n--------------------------\n");
+		printf("\nPrecione ENTER para voltar\n");
+		getchar();
+		getchar();
+		return;
+	}
+
 	printf("\t--LISTA DE PRODUTOS--\n\n--------------------------\n");
-	if ((*n) == 0) printf("Nenhum Produto Registrado!\n--------------------------\n");
-    	else{
-        	for(i = 0; i < (*n); i++){
+	for(i = 0; i < (*n); i++){
         		printf(" Id: %d\n", p[i].id);
         		printf(" Nome: %s\n", p[i].nome );
         		printf(" Preco: RS %.2f\n", p[i].preco);
         		printf("-----------------------\n");
-        	}
-        }
+    }
+
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
@@ -234,9 +309,9 @@ int main()
 	int opcao, qtd = 0;
 	produto *mercadoria = 0;
 
-    //inicializa();
+    //inicializa(); nao estou utilizando devido ao tempo de espera que a funcao adiciona
 
-	//mercadoria = ler_lista_produtos_txt(mercadoria, &qtd);
+	mercadoria = ler_lista_produtos_txt(mercadoria, &qtd);
 
 	while (1) {
     	system("clear");
