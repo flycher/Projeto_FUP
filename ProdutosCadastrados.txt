@@ -10,6 +10,21 @@ sabonete
 4
 shampoo
 7.250000
+9
+teste 2
+4.000000
+13
+teste
+97.000000
+18
+teste teste
+56312565760.000000
 27
 cafe instantaneo
 2.300000
+45
+teste 3
+66.000000
+32
+teste 1 teste
+22.000000

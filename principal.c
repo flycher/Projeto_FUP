@@ -265,7 +265,7 @@ void consulta_produto (produto *p, int *n)
 //funcao para imprimir todos os produtos cadastrados
 void imprime_produtos (produto *p, int *n)
 {
-	int i;
+	int i, j;
 	system("clear");
 	system("clear");
 
@@ -277,6 +277,17 @@ void imprime_produtos (produto *p, int *n)
 		getchar();
 		getchar();
 		return;
+	}
+
+	produto aux;
+	for (i = 0; i < (*n); i++) {
+		for (j = 1; j < (*n); j++) {
+			if (p[j].id < p[j-1].id) {
+				aux = p[j-1];
+				p[j-1] = p[j];
+				p[j] = aux;
+			}
+		}
 	}
 
 	printf("\t--LISTA DE PRODUTOS--\n\n--------------------------\n");
