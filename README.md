@@ -9,8 +9,17 @@ Sistema de supermercado
 
  ● Consulta de Produtos [✓]
 
+ ● Interface Produtos [✓]
+
+ ● Salvar Produtos em Arquivo [✓]
+
  ● Caixa [ ]
 
  ● Relatório de Vendas [ ]
 
- ● Salvar em Arquivo [✓]
+ ● Salvar Vendas em Arquivo [ ]
+
+ ● Interface Vendas [ ]
+
+ ● Compilação Separada [ ]
+ 
