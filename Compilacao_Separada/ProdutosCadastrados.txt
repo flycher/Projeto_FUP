@@ -1,0 +1,24 @@
+1
+pasta de dente
+1.750000
+2
+escova de dente
+2.500000
+3
+sabonete
+0.850000
+4
+shampoo
+7.250000
+12
+teste teste
+0.555000
+27
+cafe instantaneo
+2.300000
+45
+teste 1
+12676.000000
+4335
+aijhauhdauh
+1314556.000000
