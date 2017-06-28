@@ -1,8 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "interface.h"
 #include "produtos.h"
 
-//funcao para cadastra produto
+//funcao para ler os dados do arquivo
+produto* ler_lista_produtos_txt (produto *vetor, int *n)
+{
+    int i = 0;
+	produto auxiliar;
+
+	FILE *f = fopen("ProdutosCadastrados.txt", "r");
+	if (f == 0) {
+		FILE *f = fopen("ProdutosCadastrados.txt", "w");
+        f = f;
+		return vetor;
+	}
+
+	while(fscanf(f, "%d\n%[^\n]\n%f\n", &auxiliar.id, auxiliar.nome, &auxiliar.preco) == 3) {
+
+    	if ((*n) == 0) {
+    		vetor = (produto*) malloc(sizeof(produto));
+            if(vetor == 0) printf("Erro no malloc");
+    	}	else {
+    			vetor = (produto*) realloc(vetor, ((*n)+1) * sizeof(produto));
+    			if(vetor == 0) printf("Erro no realloc");
+    		}
+
+		vetor[i] = auxiliar;
+    	i++;
+    	(*n)++;
+    }
+
+	return vetor;
+}
+
+//funcao para escrever os dados no arquivo
+void produto_para_arquivo(produto vetor[], int n)
+{
+	FILE *f = fopen("ProdutosCadastrados.txt", "w");
+	int i;
+
+	if (f == 0) {
+      printf("** ERRO, Arquivo Inacessível! **");
+	}
+
+    for( i = 0; i < n; i++) {
+		fprintf(f, "%d\n%s\n%f\n", vetor[i].id, vetor[i].nome, vetor[i].preco);
+	}
+
+	fclose(f);
+}
+
+//funcao para cadastrar produto
 produto* cadastra_produto (produto *p, int *n)
 {
 	system("clear");
@@ -99,7 +149,7 @@ void atualiza_produto (produto *p, int *n)
 
 //funcao para remover produto
 produto* remove_produto(produto *p, int *n)
- {
+{
      system("clear");
 	 system("clear");
 
@@ -191,6 +241,7 @@ void imprime_produtos (produto *p, int *n)
 	system("clear");
 	system("clear");
 
+	//caso o arquivo nao tenha nenhum produto cadastrado
 	if ((*n) == 0) {
 		printf("--------------------------\n");
 		printf("Nenhum Produto Registrado!");
@@ -200,10 +251,11 @@ void imprime_produtos (produto *p, int *n)
 		getchar();
 		return;
 	}
-	
+
+	//organiza os produtos por ordem crescente de id
 	produto aux;
-	for (i = 0; i < (*n); i++) {
-		for (j = 1; j < (*n); j++) {
+	for(i = 0; i < (*n); i++) {
+		for(j = 1; j < (*n); j++) {
 			if (p[j].id < p[j-1].id) {
 				aux = p[j-1];
 				p[j-1] = p[j];
@@ -211,8 +263,9 @@ void imprime_produtos (produto *p, int *n)
 			}
 		}
 	}
-	
-	printf("\t--LISTA DE PRODUTOS--\n\n--------------------------\n");
+
+	//imprime todos os produtos cadastrados
+	printf("\t--LISTA DE PRODUTOS --\n\n--------------------------\n");
 	for(i = 0; i < (*n); i++){
         		printf(" Id: %d\n", p[i].id);
         		printf(" Nome: %s\n", p[i].nome );
