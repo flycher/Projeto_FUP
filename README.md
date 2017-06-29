@@ -13,13 +13,12 @@ Sistema de supermercado
 
  ● Salvar Produtos em Arquivo [✓]
 
- ● Caixa [ ]
+ ● Caixa [✓]
 
  ● Relatório de Vendas [ ]
 
  ● Salvar Vendas em Arquivo [ ]
 
- ● Interface Vendas [ ]
+ ● Interface Vendas [✓]
 
  ● Compilação Separada [ ]
- 

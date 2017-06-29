@@ -4,6 +4,7 @@
 #include "interface.h"
 #include "produtos.h"
 #include "opcoes.h"
+#include "caixa.h"
 
 
 //funcao para encerrar programa
@@ -20,11 +21,11 @@ void encerra_programa ()
 void menu_produtos (produto *mercadoria, int *qtd)
 {
 	char opcao;
-	
+
 	while (opcao != '9') {
 		interface_menu_produtos();
 		scanf(" %c", &opcao);
-							
+
 		switch (opcao) { //opcoes do menu de produtos
 
 			case '1' :
@@ -61,24 +62,23 @@ void menu_produtos (produto *mercadoria, int *qtd)
 		}
 	}
 }
-	
+
 //funcao para menu principal
 void menu_principal (produto *mercadoria, int *qtd)
 {
 	char opcao;
-	
+
 	while (1) {
 		interface_menu_principal();
 		scanf(" %c", &opcao);
-		
+
 		switch (opcao) { //opcoes do menu principal
 			case '1' :
 				menu_produtos(mercadoria, qtd);
 				break;
 
 			case '2' :
-				system("clear");
-				em_construcao();
+				iniciar_compra(mercadoria, qtd);
 				break;
 
 			case '3' :

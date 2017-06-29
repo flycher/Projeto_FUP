@@ -3,6 +3,8 @@
 #include <string.h>
 #include "interface.h"
 #include "produtos.h"
+#include "opcoes.h"
+#include "caixa.h"
 
 //funcao para ler os dados do arquivo
 produto* ler_lista_produtos_txt (produto *vetor, int *n)

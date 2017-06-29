@@ -4,6 +4,7 @@
 #include "interface.h"
 #include "produtos.h"
 #include "opcoes.h"
+#include "caixa.h"
 
 //simular carregamento na abertura do programa(nao essencial ao programa)
 void carregando()
@@ -67,5 +68,5 @@ void interface_menu_produtos ()
 	printf(" [5] - Verificar Produtos Cadastrados.\n");
 	printf(" [9] - Retornar ao Menu Inicial.\n");
 	printf("\nO que deseja? ");
-	
+
 }
