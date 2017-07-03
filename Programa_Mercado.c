@@ -388,8 +388,8 @@ void imprime_produtos (produto *p, int *n)
 //funcao para registrar compra
 void iniciar_compra (produto *p, int *n)
 {
-	int i, c = 0, aux, qtd_compra = 0, teste1, teste2;
-	float total_compra = 0, troco, qtd_produtos = 0;
+	int i, c = 0, aux, teste1, teste2;
+	float total_compra = 0, troco, qtd_compra = 0, qtd_produtos = 0;
 	carrinho *compra;
 
 	system("clear");
@@ -429,7 +429,7 @@ void iniciar_compra (produto *p, int *n)
 			}
 
 			printf("-----------------------------------------------------------------------\n");
-			printf("Total\t\t\t|\t%d\t|\t\t|  R$ %.2f\n", qtd_compra, total_compra);
+			printf("Total\t\t\t|\t%.0f\t|\t\t|  R$ %.2f\n", qtd_compra, total_compra);
 			printf("-----------------------------------------------------------------------\n");
 			printf("Valor recebido = R$ ");
 			scanf(" %f", &troco);

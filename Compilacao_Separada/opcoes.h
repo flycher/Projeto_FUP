@@ -1,5 +1,5 @@
 //funcao para encerrar programa
-void encerra_programa ();
+void encerra_programa (produto *p);
 
 //funcao para menu de produtos
 void menu_produtos (produto *p, int *n);

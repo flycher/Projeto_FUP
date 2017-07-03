@@ -88,7 +88,7 @@ void menu_principal (produto *p, int *n)
 				break;
 
     		case '9' :
-				encerra_programa();
+				encerra_programa(p);
     			break;
 
     		default:
