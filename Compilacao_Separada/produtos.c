@@ -61,7 +61,8 @@ produto* cadastra_produto (produto *p, int *n)
 
 	int i;
 	produto auxiliar;
-    printf("\t--CADASTRO DO PRODUTO--\n\n");
+    printf("\t--CADASTRO DO PRODUTO--\n");
+	printf("-----------------------\n");
     printf("Insira a ID: ");
 	scanf(" %d", &auxiliar.id);
 
@@ -78,8 +79,8 @@ produto* cadastra_produto (produto *p, int *n)
 	}
 
 	printf("Insira o nome: ");
-	scanf(" %50[^\n]", auxiliar.nome);
-	printf("Insira o preco: ");
+	scanf(" %32[^\n]", auxiliar.nome);
+	printf("Insira o preco: R$ ");
 	scanf(" %f", &auxiliar.preco);
 
 	if ((*n) == 0) {
@@ -124,11 +125,12 @@ void atualiza_produto (produto *p, int *n)
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
+			printf("-----------------------\n");
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
             printf("\nInsira o novo Nome do Produto: ");
-            scanf("\n%50[^\n]", p[i].nome);
-            printf("Insira o novo Preço do Produto: ");
+            scanf("\n%32[^\n]", p[i].nome);
+            printf("Insira o novo Preço do Produto: R$ ");
     		scanf("%f", &p[i].preco);
     		cont++;
     	}
@@ -170,6 +172,7 @@ produto* remove_produto(produto *p, int *n)
      scanf("%d", &aux);
      for (i = 0; i < (*n); i++) {
          if (aux == p[i].id) {
+			 printf("-----------------------\n");
              printf(" Nome: %s\n", p[i].nome );
      		 printf(" Preco: RS %.2f\n", p[i].preco);
              p[i] = p[(*n) - 1];
@@ -219,6 +222,7 @@ void consulta_produto (produto *p, int *n)
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
+			printf("-----------------------\n");
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
     		cont++;

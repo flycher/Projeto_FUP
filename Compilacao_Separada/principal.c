@@ -1,5 +1,5 @@
 //atalho para compilaçao separada
-//gcc principal.c interface.c produtos.c opcoes.c caixa.c && ./a.out
+//gcc -c *c && gcc *o -o Programa_Mercado && ./Programa_Mercado
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

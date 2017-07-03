@@ -29,6 +29,14 @@ void carregando()
 
 }
 
+//funcao para calcular os espacos ao imprimir o nome dos produtos na finalizaçao da compra
+void espacamento_tabela(char* nome, int espaco)
+{
+	int i, n;
+	n = strlen(nome);
+	for( i = 0; i < (espaco - n); i++)	printf(" ");
+ }
+
 //funcao para imprimir funcionalidades ainda nao implementadas
 void em_construcao()
 {

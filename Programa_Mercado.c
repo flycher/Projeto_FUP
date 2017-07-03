@@ -28,16 +28,16 @@ void carregando()
 //estrutura para dados dos produtos
 typedef struct{
     int id;
-    char nome[51];
+    char nome[33];
     float preco;
 } produto;
 
 //estrutura para funcao de compras
 typedef struct{
 	int id;
-    char nome[51];
+    char nome[33];
     float preco;
-    int quantidade;
+    float quantidade;
 } carrinho;
 
 //funcao para ler os produtos ja cadastrados do arquivo
@@ -127,7 +127,7 @@ produto* cadastra_produto (produto *p, int *n)
 	}
 
 	printf("Insira o nome: ");
-	scanf(" %50[^\n]", auxiliar.nome);
+	scanf(" %32[^\n]", auxiliar.nome);
 	printf("Insira o preco: R$ ");
 	scanf(" %f", &auxiliar.preco);
 
@@ -180,7 +180,7 @@ void atualiza_produto (produto *p, int *n)
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
             printf("\nInsira o novo Nome do Produto: ");
-            scanf("\n%50[^\n]", p[i].nome);
+            scanf("\n%32[^\n]", p[i].nome);
             printf("Insira o novo Preço do Produto: R$ ");
     		scanf("%f", &p[i].preco);
     		cont++; //contador para testar se o id pesquisado existe
@@ -422,7 +422,8 @@ void menu_produtos (produto *p, int *n)
 
 			case '9' :
 				system("clear");
-				break;
+				//break;
+				main();
 
 			default:
 				system("clear");
@@ -435,16 +436,25 @@ void menu_produtos (produto *p, int *n)
 	}
 }
 
+//funcao para calcular os espacos ao imprimir o nome dos produtos na finalizaçao da compra
+void espacamento_tabela(char* nome, int espaco)
+{
+	int i, n;
+	n = strlen(nome);
+	for( i = 0; i < (espaco - n); i++)	printf(" ");
+ }
+
 //funcao para registrar compra
 void iniciar_compra (produto *p, int *n)
 {
-	int i, c = 1, aux, qtd_produtos;
-	float total_compra = 0;
+	int i, c = 1, aux, qtd_compra = 0, teste1, teste2;
+	float total_compra = 0, troco, qtd_produtos = 0;
 	carrinho *compra = (carrinho*) malloc(sizeof(carrinho) );
 	system("clear");
 	system("clear");
 
 	if ((*n) == 0) {
+		free(compra);
 		printf("--------------------------\n");
 		printf("Nenhum Produto Registrado!");
 		printf("\n--------------------------\n");
@@ -464,40 +474,77 @@ void iniciar_compra (produto *p, int *n)
 		printf("Insira ID do produto.\n");
 		scanf(" %d", &aux);
 
-
 		if (aux == 0) {
+			if ( qtd_compra == 0) break;
 			system("clear");
 			system("clear");
-			printf("Produto\t\t\t| Quantidade\t| Valor\n");
-			printf("--------------------------------------------------\n");
+			printf("Produto\t\t\t| Quantidade\t|  Valor Und.\t|  Valor Total\n");
+			printf("-----------------------------------------------------------------------\n");
 			for(i = 0; i < (c-1); i++) {
-				printf("%s\t\t\t %d\t R$ %.2f\n", compra[i].nome, compra[i].quantidade, compra[i].preco);
+
+				printf("%s", compra[i].nome);
+				espacamento_tabela(compra[i].nome, 32);
+				printf("%.2f \t", compra[i].quantidade);
+				printf("  R$ %.2f \t R$  %.2lf\n",compra[i].preco, compra[i].preco * compra[i].quantidade);
+
 			}
-			printf("--------------------------------------------------\n");
-			printf("Total a pagar = R$ %.2f\n", total_compra);
-			float troco = 0;
+
+			printf("-----------------------------------------------------------------------\n");
+			printf("Total\t\t\t|\t%d\t|\t\t| R$ %.2f\n", qtd_compra, total_compra);
+			printf("-----------------------------------------------------------------------\n");
 			printf("Valor recebido = R$ ");
 			scanf(" %f", &troco);
+			if ((troco == 0) || (troco - total_compra) < 0 ) {
+				printf("\nCompra cancelada.\n");
+				free(compra);
+				printf("\nPrecione ENTER para voltar ao menu principal\n");
+				getchar();
+				getchar();
+				break;
+			}
+
 			troco -= total_compra;
 			printf("Troco = R$ %.2f", troco);
 			printf("\nObrigado pela preferencia, volte sempre!\n");
 			//aqui coloca a funcao para mandar os dados da compra para o arquivo
 			//que vai guardas os negocio pro relatorio
 			free(compra);
-			printf("--------------------------------------------------\n");
+			printf("------------------------------------------------------\n");
 			printf("\nPrecione ENTER para voltar ao menu principal\n");
 			getchar();
 			getchar();
 			break;
 		}
 
-		for(i = 0; i < (*n); i++){
+		//funcao para adicionar quantidade aos produtos que ja estao no carrinho
+		teste2 = 0;
+		for(i = 0; i < qtd_compra; i++){
+			if ( aux == compra[i].id){
+				printf(" Nome: %s\n", compra[i].nome );
+				printf(" Preco: RS %.2f\n", compra[i].preco);
+				printf("Insira a quantidade: ");
+				scanf(" %f", &qtd_produtos);
+				compra[i].quantidade += qtd_produtos;
+				qtd_compra += qtd_produtos;
+				total_compra += compra[i].preco * qtd_produtos;
+				teste2 = 1;
+
+			}
+		}
+
+		//funcao para adicionar novo produto ao carrinho
+
+		teste1 = 0;
+		for(i = 0; ( i < (*n) ) && (!teste2); i++){
 			if (aux == p[i].id) {
+				teste1 = 1;
 				printf(" Nome: %s\n", p[i].nome );
 				printf(" Preco: RS %.2f\n", p[i].preco);
-				int qtd_produtos = 1;
+				qtd_produtos = 1;
 				printf("Insira a quantidade: ");
-				scanf("%d", &qtd_produtos);
+				scanf("%f", &qtd_produtos);
+				if (qtd_produtos == 0) continue;
+				qtd_compra += qtd_produtos;
 				total_compra += p[i].preco * qtd_produtos;
 				compra[c-1].id = p[i].id;
 				strcpy(compra[c-1].nome,p[i].nome);
@@ -505,8 +552,15 @@ void iniciar_compra (produto *p, int *n)
 				compra[c-1].quantidade = qtd_produtos;
 				c++;
 				compra = (carrinho*) realloc(compra, (c+1) * sizeof(carrinho) );
-				}
+			}
 		}
+		if (!teste1 && !teste2) {
+			printf("\nID não encontrado.\n");
+			printf("Precione ENTER para continuar");
+			getchar();
+			getchar();
+		}
+
 	}
 }
 
@@ -554,7 +608,7 @@ int main()
 
 	produto *mercadoria = 0;
 
-    carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
+    //carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
 
 	mercadoria = ler_arquivo_produtos(mercadoria, &qtd);   //le os dados do arquivo
 	menu_principal(mercadoria, &qtd); //chama menu principal

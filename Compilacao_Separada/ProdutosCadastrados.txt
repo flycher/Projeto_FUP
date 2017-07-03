@@ -1,6 +1,6 @@
 1
 Pasta de Dente
-1.750000
+1.800000
 2
 Escova de Dente
 2.750000
@@ -22,3 +22,15 @@ Pente
 8
 Desodorante
 5.250000
+9
+Condicionador
+6.600000
+10
+Macarrao Instantaneo
+1.000000
+11
+Leite em Pó
+3.500000
+12
+Açucar
+3.200000

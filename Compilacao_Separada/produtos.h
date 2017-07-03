@@ -1,7 +1,7 @@
 //estrutura para dados dos produtos
 typedef struct{
     int id;
-    char nome[51];
+    char nome[33];
     float preco;
 } produto;
 

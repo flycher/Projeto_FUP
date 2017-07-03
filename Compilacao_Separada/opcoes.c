@@ -6,7 +6,6 @@
 #include "opcoes.h"
 #include "caixa.h"
 
-
 //funcao para encerrar programa
 void encerra_programa ()
 
@@ -15,7 +14,6 @@ void encerra_programa ()
     printf("Volte sempre!\n");
     exit(0);
 }
-
 
 //funcao para menu de produtos
 void menu_produtos (produto *mercadoria, int *qtd)
@@ -50,6 +48,7 @@ void menu_produtos (produto *mercadoria, int *qtd)
 
 			case '9' :
 				system("clear");
+				//main();
 				break;
 
 			default:
