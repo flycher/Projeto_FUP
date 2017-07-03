@@ -8,7 +8,6 @@
 
 //funcao para encerrar programa
 void encerra_programa ()
-
 {
 	system("clear");
     printf("Volte sempre!\n");
@@ -16,7 +15,7 @@ void encerra_programa ()
 }
 
 //funcao para menu de produtos
-void menu_produtos (produto *mercadoria, int *qtd)
+void menu_produtos (produto *p, int *n)
 {
 	char opcao;
 
@@ -27,29 +26,28 @@ void menu_produtos (produto *mercadoria, int *qtd)
 		switch (opcao) { //opcoes do menu de produtos
 
 			case '1' :
-				mercadoria = cadastra_produto(mercadoria, qtd);
+				p = cadastra_produto(p, n);
 				break;
 
 			case '2' :
-				atualiza_produto(mercadoria, qtd);
+				atualiza_produto(p, n);
 				break;
 
 			case '3' :
-				mercadoria = remove_produto(mercadoria, qtd);
+				p = remove_produto(p, n);
 				break;
 
 			case '4' :
-				consulta_produto(mercadoria, qtd);
+				consulta_produto(p, n);
 				break;
 
 			case '5' :
-				imprime_produtos(mercadoria, qtd);
+				imprime_produtos(p, n);
 				break;
 
 			case '9' :
 				system("clear");
-				//main();
-				break;
+				return;
 
 			default:
 				system("clear");
@@ -63,7 +61,7 @@ void menu_produtos (produto *mercadoria, int *qtd)
 }
 
 //funcao para menu principal
-void menu_principal (produto *mercadoria, int *qtd)
+void menu_principal (produto *p, int *n)
 {
 	char opcao;
 
@@ -73,11 +71,11 @@ void menu_principal (produto *mercadoria, int *qtd)
 
 		switch (opcao) { //opcoes do menu principal
 			case '1' :
-				menu_produtos(mercadoria, qtd);
+				menu_produtos(p, n);
 				break;
 
 			case '2' :
-				iniciar_compra(mercadoria, qtd);
+				iniciar_compra(p, n);
 				break;
 
 			case '3' :

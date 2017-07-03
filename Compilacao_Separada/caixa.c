@@ -17,7 +17,6 @@ void iniciar_compra (produto *p, int *n)
 	system("clear");
 
 	if ((*n) == 0) {
-		free(compra);
 		printf("--------------------------\n");
 		printf("Nenhum Produto Registrado!");
 		printf("\n--------------------------\n");
@@ -38,7 +37,7 @@ void iniciar_compra (produto *p, int *n)
 		scanf(" %d", &aux);
 
 		if (aux == 0) {
-			if ( qtd_compra == 0) break;
+			if ( qtd_compra == 0) return;
 			system("clear");
 			system("clear");
 			printf("Produto\t\t\t| Quantidade\t|  Valor Und.\t|  Valor Total\n");
@@ -68,7 +67,6 @@ void iniciar_compra (produto *p, int *n)
 			printf("Troco = R$ %.2f", troco);
 			printf("\nObrigado pela preferencia, volte sempre!\n");
 			//aqui coloca a funcao para mandar os dados da compra para o arquivo
-			//que vai guardas os negocio pro relatorio
 			free(compra);
 			printf("------------------------------------------------------\n");
 			printf("\nPrecione ENTER para voltar ao menu principal\n");

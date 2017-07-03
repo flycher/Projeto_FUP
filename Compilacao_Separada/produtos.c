@@ -7,7 +7,7 @@
 #include "caixa.h"
 
 //funcao para ler os dados do arquivo
-produto* ler_lista_produtos_txt (produto *vetor, int *n)
+produto* ler_lista_produtos_txt (produto *p, int *n)
 {
     int i = 0;
 	produto auxiliar;
@@ -16,25 +16,25 @@ produto* ler_lista_produtos_txt (produto *vetor, int *n)
 	if (f == 0) {
 		FILE *f = fopen("ProdutosCadastrados.txt", "w");
         f = f;
-		return vetor;
+		return p;
 	}
 
 	while(fscanf(f, "%d\n%[^\n]\n%f\n", &auxiliar.id, auxiliar.nome, &auxiliar.preco) == 3) {
 
     	if ((*n) == 0) {
-    		vetor = (produto*) malloc(sizeof(produto));
-            if(vetor == 0) printf("Erro no malloc");
+    		p = (produto*) malloc(sizeof(produto));
+            if(p == 0) printf("Erro no malloc");
     	}	else {
-    			vetor = (produto*) realloc(vetor, ((*n)+1) * sizeof(produto));
-    			if(vetor == 0) printf("Erro no realloc");
+    			p = (produto*) realloc(p, ((*n)+1) * sizeof(produto));
+    			if(p == 0) printf("Erro no realloc");
     		}
 
-		vetor[i] = auxiliar;
+		p[i] = auxiliar;
     	i++;
     	(*n)++;
     }
 
-	return vetor;
+	return p;
 }
 
 //funcao para escrever os dados no arquivo

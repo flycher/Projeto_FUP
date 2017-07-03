@@ -14,7 +14,7 @@ int main()
 
 	produto *mercadoria = 0;
 
-    //carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
+    carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
 
 	mercadoria = ler_lista_produtos_txt(mercadoria, &qtd);   //le os dados do arquivo
 	menu_principal(mercadoria, &qtd); //chama menu principal

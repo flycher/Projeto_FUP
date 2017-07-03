@@ -34,3 +34,6 @@ Leite em Pó
 12
 Açucar
 3.200000
+13
+Achocolatado
+5.500000
