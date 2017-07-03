@@ -7,8 +7,9 @@
 #include "caixa.h"
 
 //funcao para encerrar programa
-void encerra_programa ()
+void encerra_programa (produto *p)
 {
+	free(p);
 	system("clear");
     printf("Volte sempre!\n");
     exit(0);
@@ -46,8 +47,11 @@ void menu_produtos (produto *p, int *n)
 				break;
 
 			case '9' :
-				system("clear");
-				return;
+				menu_principal(p, n);
+				//break;
+				//return;
+				//return main();
+				//main();
 
 			default:
 				system("clear");

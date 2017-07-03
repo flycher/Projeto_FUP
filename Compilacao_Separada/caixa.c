@@ -44,9 +44,9 @@ void iniciar_compra (produto *p, int *n)
 			printf("-----------------------------------------------------------------------\n");
 			for(i = 0; i < (c); i++) {
 				printf("%s", compra[i].nome);
-				espacamento_tabela(compra[i].nome, 32);
-				printf("%.2f \t", compra[i].quantidade);
-				printf("  R$ %.2f \t R$  %.2lf\n",compra[i].preco, compra[i].preco * compra[i].quantidade);
+				espacamento_tabela(compra[i].nome, 30);
+				printf("%.2f\t", compra[i].quantidade);
+				printf("    R$ %.2f\t   R$ %.2lf\n",compra[i].preco, compra[i].preco * compra[i].quantidade);
 			}
 
 			printf("-----------------------------------------------------------------------\n");

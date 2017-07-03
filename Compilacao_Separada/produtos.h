@@ -1,12 +1,12 @@
 //estrutura para dados dos produtos
 typedef struct{
     int id;
-    char nome[33];
+    char nome[31];
     float preco;
 } produto;
 
 //funcao para ler os dados do arquivo
-produto* ler_lista_produtos_txt (produto *vetor, int *n);
+produto* ler_arquivo_produtos (produto *p, int *n);
 
 //funcao para escrever os dados no arquivo
 void produto_para_arquivo(produto vetor[], int n);

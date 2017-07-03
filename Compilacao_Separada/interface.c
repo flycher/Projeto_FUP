@@ -11,15 +11,15 @@ void carregando()
 {
 	int x, carregado = 0;
 
-	while ( carregado != 106) {
+	while ( carregado < 106) {
     	system("clear");
     	printf("\tBEM VINDO!");
     	if (carregado <= 100) printf("\n\n\nCarregando: %d / 100.\n", carregado);
     	   else printf("\n\n\nCarregando: 100 / 100.\n");
 
         while (1) {
-			if ( carregado < 90 ) x = rand() % 5000000;
-			   else x = rand() % 18000000;
+			if ( carregado < 90 ) x = rand() % 4000000;
+			   else x = rand() % 12000000;
 			if (x == 1){
 				carregado++;
 				break;

@@ -19,12 +19,3 @@ Condicionador
 7
 Pente
 1.250000
-8
-Desodorante
-5.250000
-10
-teste
-123.000000
-11
-teste2
-43321.000000

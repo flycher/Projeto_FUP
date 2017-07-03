@@ -5,14 +5,14 @@
 //estrutura para dados dos produtos
 typedef struct{
     int id;
-    char nome[33];
+    char nome[31];
     float preco;
 } produto;
 
 //estrutura para funcao de compras
 typedef struct{
 	int id;
-    char nome[33];
+    char nome[31];
     float preco;
     float quantidade;
 } carrinho;
@@ -22,15 +22,15 @@ void carregando()
 {
 	int x, carregado = 0;
 
-	while ( carregado != 106) {
+	while ( carregado < 106) {
     	system("clear");
     	printf("\tBEM VINDO!");
     	if (carregado <= 100) printf("\n\n\nCarregando: %d / 100.\n", carregado);
     	   else printf("\n\n\nCarregando: 100 / 100.\n");
 
         while (1) {
-			if ( carregado < 90 ) x = rand() % 5000000;
-			   else x = rand() % 18000000;
+			if ( carregado < 90 ) x = rand() % 4000000;
+			   else x = rand() % 12000000;
 			if (x == 1){
 				carregado++;
 				break;
@@ -91,7 +91,7 @@ void interface_menu_produtos ()
 }
 
 //funcao para ler os dados do arquivo
-produto* ler_lista_produtos_txt (produto *p, int *n)
+produto* ler_arquivo_produtos (produto *p, int *n)
 {
     int i = 0;
 	produto auxiliar;
@@ -145,10 +145,20 @@ produto* cadastra_produto (produto *p, int *n)
 
 	int i;
 	produto auxiliar;
-    printf("\t--CADASTRO DO PRODUTO--\n");
+    printf("--CADASTRO DE PRODUTO--\n");
 	printf("-----------------------\n");
     printf("Insira a ID: ");
 	scanf(" %d", &auxiliar.id);
+
+	if (auxiliar.id == 0) {
+		printf("\n-------------------------------\n");
+		printf("ID '0' reservado pelo sistema.");
+		printf("\n-------------------------------\n");
+		printf("\nPrecione ENTER para voltar\n");
+		getchar();
+		getchar();
+		return p;
+	}
 
 	for (i = 0; i < (*n); i++) {
 		if (auxiliar.id == p[i].id) {
@@ -163,7 +173,7 @@ produto* cadastra_produto (produto *p, int *n)
 	}
 
 	printf("Insira o nome: ");
-	scanf(" %32[^\n]", auxiliar.nome);
+	scanf(" %30[^\n]", auxiliar.nome);
 	printf("Insira o preco: R$ ");
 	scanf(" %f", &auxiliar.preco);
 
@@ -180,7 +190,7 @@ produto* cadastra_produto (produto *p, int *n)
 		}
 
 	p[(*n) - 1] = auxiliar;
-	produto_para_arquivo(p, &(*n));
+	produto_para_arquivo(p, (*n));
 
 	return p;
 }
@@ -204,16 +214,19 @@ void atualiza_produto (produto *p, int *n)
 	int i, aux, cont = 0;
 	system("clear");
 	system("clear");
+	printf("--ATUALIZAÇÃO DE PRODUTO--\n");
+	printf("---------------------------------\n");
     printf("Insira o Código ID do Produto: ");
-    scanf("%d", &aux);
+	scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("-----------------------\n");
+			printf("---------------------------------\n");
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
+			printf("---------------------------------\n");
             printf("\nInsira o novo Nome do Produto: ");
-            scanf("\n%32[^\n]", p[i].nome);
+            scanf("\n%30[^\n]", p[i].nome);
             printf("Insira o novo Preço do Produto: R$ ");
     		scanf("%f", &p[i].preco);
     		cont++;
@@ -223,11 +236,11 @@ void atualiza_produto (produto *p, int *n)
     produto_para_arquivo(p, (*n));
 
     if (cont == 0) {
-			printf("\n-----------------------\n");
-			printf("Produto não Encontrado!\n");
-	}	else {
 		printf("\n-----------------------\n");
-		printf("  Produto Atualizado!\n");
+		printf("Produto não Encontrado!\n");
+	}	else {
+			printf("\n-----------------------\n");
+			printf("  Produto Atualizado!\n");
 		}
     printf("-----------------------\n");
 	printf("\nPrecione ENTER para voltar\n");
@@ -252,11 +265,13 @@ produto* remove_produto(produto *p, int *n)
 	 }
 
      int i, aux, cont = 0;
+	 printf("--REMOÇÃO DE PRODUTO--\n");
+ 	printf("---------------------------------\n");
      printf("Insira o Código ID do Produto: ");
      scanf("%d", &aux);
      for (i = 0; i < (*n); i++) {
          if (aux == p[i].id) {
-			 printf("-----------------------\n");
+			 printf("---------------------------------\n");
              printf(" Nome: %s\n", p[i].nome );
      		 printf(" Preco: RS %.2f\n", p[i].preco);
              p[i] = p[(*n) - 1];
@@ -301,12 +316,14 @@ void consulta_produto (produto *p, int *n)
 		return;
 	}
 
+	printf("--CONSULTA DE PRODUTO--\n");
+	printf("---------------------------------\n");
     printf("Insira o Código ID do Produto: ");
     scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("-----------------------\n");
+			printf("---------------------------------\n");
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
     		cont++;
@@ -406,13 +423,13 @@ void iniciar_compra (produto *p, int *n)
 			printf("-----------------------------------------------------------------------\n");
 			for(i = 0; i < (c); i++) {
 				printf("%s", compra[i].nome);
-				espacamento_tabela(compra[i].nome, 32);
-				printf("%.2f \t", compra[i].quantidade);
-				printf("  R$ %.2f \t R$  %.2lf\n",compra[i].preco, compra[i].preco * compra[i].quantidade);
+				espacamento_tabela(compra[i].nome, 30);
+				printf("%.2f\t", compra[i].quantidade);
+				printf("    R$ %.2f\t   R$ %.2lf\n",compra[i].preco, compra[i].preco * compra[i].quantidade);
 			}
 
 			printf("-----------------------------------------------------------------------\n");
-			printf("Total\t\t\t|\t%d\t|\t\t| R$ %.2f\n", qtd_compra, total_compra);
+			printf("Total\t\t\t|\t%d\t|\t\t|  R$ %.2f\n", qtd_compra, total_compra);
 			printf("-----------------------------------------------------------------------\n");
 			printf("Valor recebido = R$ ");
 			scanf(" %f", &troco);
@@ -429,7 +446,6 @@ void iniciar_compra (produto *p, int *n)
 			printf("Troco = R$ %.2f", troco);
 			printf("\nObrigado pela preferencia, volte sempre!\n");
 			//aqui coloca a funcao para mandar os dados da compra para o arquivo
-			//que vai guardas os negocio pro relatorio
 			free(compra);
 			printf("------------------------------------------------------\n");
 			printf("\nPrecione ENTER para voltar ao menu principal\n");
@@ -495,9 +511,9 @@ void iniciar_compra (produto *p, int *n)
 }
 
 //funcao para encerrar programa
-void encerra_programa ()
-
+void encerra_programa (produto *p)
 {
+	free(p);
 	system("clear");
     printf("Volte sempre!\n");
     exit(0);
@@ -535,8 +551,11 @@ void menu_produtos (produto *p, int *n)
 				break;
 
 			case '9' :
-				system("clear");
-				return;
+				menu_principal(p, n);
+				//break;
+				//return;
+				//return main();
+				//main();
 
 			default:
 				system("clear");
@@ -573,7 +592,7 @@ void menu_principal (produto *p, int *n)
 				break;
 
     		case '9' :
-				encerra_programa();
+				encerra_programa(p);
     			break;
 
     		default:
@@ -594,7 +613,7 @@ int main()
 
     carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
 
-	mercadoria = ler_lista_produtos_txt(mercadoria, &qtd);   //le os dados do arquivo
+	mercadoria = ler_arquivo_produtos(mercadoria, &qtd);   //le os dados do arquivo
 	menu_principal(mercadoria, &qtd); //chama menu principal
 
     return 0;

@@ -1,7 +1,7 @@
 //estrutura para funcao de compras
 typedef struct{
 	int id;
-    char nome[33];
+    char nome[31];
     float preco;
     float quantidade;
 } carrinho;

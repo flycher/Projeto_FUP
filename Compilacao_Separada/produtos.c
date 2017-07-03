@@ -7,7 +7,7 @@
 #include "caixa.h"
 
 //funcao para ler os dados do arquivo
-produto* ler_lista_produtos_txt (produto *p, int *n)
+produto* ler_arquivo_produtos (produto *p, int *n)
 {
     int i = 0;
 	produto auxiliar;
@@ -61,10 +61,20 @@ produto* cadastra_produto (produto *p, int *n)
 
 	int i;
 	produto auxiliar;
-    printf("\t--CADASTRO DO PRODUTO--\n");
+    printf("--CADASTRO DE PRODUTO--\n");
 	printf("-----------------------\n");
     printf("Insira a ID: ");
 	scanf(" %d", &auxiliar.id);
+
+	if (auxiliar.id == 0) {
+		printf("\n-------------------------------\n");
+		printf("ID '0' reservado pelo sistema.");
+		printf("\n-------------------------------\n");
+		printf("\nPrecione ENTER para voltar\n");
+		getchar();
+		getchar();
+		return p;
+	}
 
 	for (i = 0; i < (*n); i++) {
 		if (auxiliar.id == p[i].id) {
@@ -79,7 +89,7 @@ produto* cadastra_produto (produto *p, int *n)
 	}
 
 	printf("Insira o nome: ");
-	scanf(" %32[^\n]", auxiliar.nome);
+	scanf(" %30[^\n]", auxiliar.nome);
 	printf("Insira o preco: R$ ");
 	scanf(" %f", &auxiliar.preco);
 
@@ -120,16 +130,19 @@ void atualiza_produto (produto *p, int *n)
 	int i, aux, cont = 0;
 	system("clear");
 	system("clear");
+	printf("--ATUALIZAÇÃO DE PRODUTO--\n");
+	printf("---------------------------------\n");
     printf("Insira o Código ID do Produto: ");
-    scanf("%d", &aux);
+	scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("-----------------------\n");
+			printf("---------------------------------\n");
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
+			printf("---------------------------------\n");
             printf("\nInsira o novo Nome do Produto: ");
-            scanf("\n%32[^\n]", p[i].nome);
+            scanf("\n%30[^\n]", p[i].nome);
             printf("Insira o novo Preço do Produto: R$ ");
     		scanf("%f", &p[i].preco);
     		cont++;
@@ -139,11 +152,11 @@ void atualiza_produto (produto *p, int *n)
     produto_para_arquivo(p, (*n));
 
     if (cont == 0) {
-			printf("\n-----------------------\n");
-			printf("Produto não Encontrado!\n");
-	}	else {
 		printf("\n-----------------------\n");
-		printf("  Produto Atualizado!\n");
+		printf("Produto não Encontrado!\n");
+	}	else {
+			printf("\n-----------------------\n");
+			printf("  Produto Atualizado!\n");
 		}
     printf("-----------------------\n");
 	printf("\nPrecione ENTER para voltar\n");
@@ -168,11 +181,13 @@ produto* remove_produto(produto *p, int *n)
 	 }
 
      int i, aux, cont = 0;
+	 printf("--REMOÇÃO DE PRODUTO--\n");
+ 	printf("---------------------------------\n");
      printf("Insira o Código ID do Produto: ");
      scanf("%d", &aux);
      for (i = 0; i < (*n); i++) {
          if (aux == p[i].id) {
-			 printf("-----------------------\n");
+			 printf("---------------------------------\n");
              printf(" Nome: %s\n", p[i].nome );
      		 printf(" Preco: RS %.2f\n", p[i].preco);
              p[i] = p[(*n) - 1];
@@ -217,12 +232,14 @@ void consulta_produto (produto *p, int *n)
 		return;
 	}
 
+	printf("--CONSULTA DE PRODUTO--\n");
+	printf("---------------------------------\n");
     printf("Insira o Código ID do Produto: ");
     scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("-----------------------\n");
+			printf("---------------------------------\n");
             printf(" Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
     		cont++;

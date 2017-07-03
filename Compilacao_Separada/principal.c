@@ -16,7 +16,7 @@ int main()
 
     carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
 
-	mercadoria = ler_lista_produtos_txt(mercadoria, &qtd);   //le os dados do arquivo
+	mercadoria = ler_arquivo_produtos(mercadoria, &qtd);   //le os dados do arquivo
 	menu_principal(mercadoria, &qtd); //chama menu principal
 
     return 0;

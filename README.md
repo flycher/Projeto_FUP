@@ -23,4 +23,4 @@ Sistema de supermercado
 
  ● Compilação Separada [ ]
 
-  ● Correção de Bugs [ ]
+  ● Correção de Bugs [✓]
