@@ -1,3 +1,6 @@
+//limpa o terminal no linux e windows
+void clear_screen();
+
 //simular carregamento na abertura do programa(nao essencial ao programa
 void carregando();
 

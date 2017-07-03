@@ -13,8 +13,8 @@ void iniciar_compra (produto *p, int *n)
 	float total_compra = 0, troco, qtd_compra = 0, qtd_produtos = 0;
 	carrinho *compra;
 
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 
 	if ((*n) == 0) {
 		printf("--------------------------\n");
@@ -27,7 +27,7 @@ void iniciar_compra (produto *p, int *n)
 	}
 
 	while(1) {
-		system("clear");
+		clear_screen();
 		printf("\t\tCARRINHO\n");
 		printf("----------------------------------------\n");
 		printf("Insira ID '0' para encerrar compra\n");
@@ -38,8 +38,8 @@ void iniciar_compra (produto *p, int *n)
 
 		if (aux == 0) {
 			if ( qtd_compra == 0) return;
-			system("clear");
-			system("clear");
+			clear_screen();
+			clear_screen();
 			printf("Produto\t\t\t| Quantidade\t|  Valor Und.\t|  Valor Total\n");
 			printf("-----------------------------------------------------------------------\n");
 			for(i = 0; i < (c); i++) {

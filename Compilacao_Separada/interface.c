@@ -6,13 +6,25 @@
 #include "opcoes.h"
 #include "caixa.h"
 
+//limpa o terminal no linux e windows
+void clear_screen()
+{
+	#ifdef _WIN32
+	system("cls");
+	#endif
+
+	#ifdef linux
+	system("clear");
+	#endif
+}
+
 //simular carregamento na abertura do programa(nao essencial ao programa)
 void carregando()
 {
 	int x, carregado = 0;
 
 	while ( carregado < 106) {
-    	system("clear");
+    	clear_screen();
     	printf("\tBEM VINDO!");
     	if (carregado <= 100) printf("\n\n\nCarregando: %d / 100.\n", carregado);
     	   else printf("\n\n\nCarregando: 100 / 100.\n");
@@ -40,8 +52,8 @@ void espacamento_tabela(char* nome, int espaco)
 //funcao para imprimir funcionalidades ainda nao implementadas
 void em_construcao()
 {
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 	printf("----------------------------\n");
 	printf("--Área em Desenvolvimento--");
 	printf("\n----------------------------\n");
@@ -53,8 +65,8 @@ void em_construcao()
 //funcao para imprimir o menu principal
 void interface_menu_principal ()
 {
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 	printf("\t--MENU INICIAL--\t%s\n\n", __DATE__);
 	printf(" [1] - Controle de Produtos.\n");
 	printf(" [2] - Iniciar Compra.\n");
@@ -66,8 +78,8 @@ void interface_menu_principal ()
 //funcao para imprimir o menu de produtos
 void interface_menu_produtos ()
 {
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 	printf("\t--CONTROLE DE PRODUTOS--\t%s\n\n", __DATE__);
 	printf(" [1] - Cadastrar Produto.\n");
 	printf(" [2] - Atualizar Produto.\n");

@@ -10,7 +10,7 @@
 void encerra_programa (produto *p)
 {
 	free(p);
-	system("clear");
+	clear_screen();
     printf("Volte sempre!\n");
     exit(0);
 }
@@ -54,7 +54,7 @@ void menu_produtos (produto *p, int *n)
 				//main();
 
 			default:
-				system("clear");
+				clear_screen();
 				printf("Opção Inválida!\n");
 				printf("\nPrecione ENTER para voltar\n");
 				getchar();
@@ -83,7 +83,7 @@ void menu_principal (produto *p, int *n)
 				break;
 
 			case '3' :
-				system("clear");
+				clear_screen();
 				em_construcao();
 				break;
 
@@ -92,7 +92,7 @@ void menu_principal (produto *p, int *n)
     			break;
 
     		default:
-	    		system("clear");
+	    		clear_screen();
 	    		printf("Opção Inválida!\n");
 	    		printf("\nPrecione ENTER para voltar\n");
 	    		getchar();
