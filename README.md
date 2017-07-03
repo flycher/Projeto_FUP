@@ -21,6 +21,6 @@ Sistema de supermercado
 
  ● Interface Vendas [✓]
 
- ● Compilação Separada [ ]
+ ● Compilação Separada [✓]
 
   ● Correção de Bugs [✓]
