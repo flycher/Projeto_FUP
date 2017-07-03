@@ -17,13 +17,25 @@ typedef struct{
     float quantidade;
 } carrinho;
 
+//limpa o terminal no linux e windows
+void clear_screen()
+{
+	#ifdef _WIN32
+	system("cls");
+	#endif
+
+	#ifdef linux
+	system("clear");
+	#endif	
+}
+
 //simular carregamento na abertura do programa(nao essencial ao programa)
 void carregando()
 {
 	int x, carregado = 0;
 
 	while ( carregado < 106) {
-    	system("clear");
+    	clear_screen();
     	printf("\tBEM VINDO!");
     	if (carregado <= 100) printf("\n\n\nCarregando: %d / 100.\n", carregado);
     	   else printf("\n\n\nCarregando: 100 / 100.\n");
@@ -51,8 +63,8 @@ void espacamento_tabela(char* nome, int espaco)
 //funcao para imprimir funcionalidades ainda nao implementadas
 void em_construcao()
 {
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 	printf("----------------------------\n");
 	printf("--Área em Desenvolvimento--");
 	printf("\n----------------------------\n");
@@ -64,8 +76,8 @@ void em_construcao()
 //funcao para imprimir o menu principal
 void interface_menu_principal ()
 {
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 	printf("\t--MENU INICIAL--\t%s\n\n", __DATE__);
 	printf(" [1] - Controle de Produtos.\n");
 	printf(" [2] - Iniciar Compra.\n");
@@ -77,8 +89,8 @@ void interface_menu_principal ()
 //funcao para imprimir o menu de produtos
 void interface_menu_produtos ()
 {
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 	printf("\t--CONTROLE DE PRODUTOS--\t%s\n\n", __DATE__);
 	printf(" [1] - Cadastrar Produto.\n");
 	printf(" [2] - Atualizar Produto.\n");
@@ -141,7 +153,7 @@ void produto_para_arquivo(produto vetor[], int n)
 //funcao para cadastrar produto
 produto* cadastra_produto (produto *p, int *n)
 {
-	system("clear");
+	clear_screen();
 
 	int i;
 	produto auxiliar;
@@ -198,8 +210,8 @@ produto* cadastra_produto (produto *p, int *n)
 //funcao para atualizar produto
 void atualiza_produto (produto *p, int *n)
 {
-	 system("clear");
-	 system("clear");
+	 clear_screen();
+	 clear_screen();
 
 	 if ((*n) == 0) {
 		printf("--------------------------\n");
@@ -212,8 +224,8 @@ void atualiza_produto (produto *p, int *n)
 	 }
 
 	int i, aux, cont = 0;
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 	printf("--ATUALIZAÇÃO DE PRODUTO--\n");
 	printf("---------------------------------\n");
     printf("Insira o Código ID do Produto: ");
@@ -251,8 +263,8 @@ void atualiza_produto (produto *p, int *n)
 //funcao para remover produto
 produto* remove_produto(produto *p, int *n)
 {
-     system("clear");
-	 system("clear");
+     clear_screen();
+	 clear_screen();
 
 	 if ((*n) == 0) {
 		printf("--------------------------\n");
@@ -303,8 +315,8 @@ void consulta_produto (produto *p, int *n)
 {
 
 	int i, aux, cont = 0;
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 
 	if ((*n) == 0) {
 		printf("--------------------------\n");
@@ -345,8 +357,8 @@ void consulta_produto (produto *p, int *n)
 void imprime_produtos (produto *p, int *n)
 {
 	int i, j;
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 
 	//caso o arquivo nao tenha nenhum produto cadastrado
 	if ((*n) == 0) {
@@ -392,8 +404,8 @@ void iniciar_compra (produto *p, int *n)
 	float total_compra = 0, troco, qtd_compra = 0, qtd_produtos = 0;
 	carrinho *compra;
 
-	system("clear");
-	system("clear");
+	clear_screen();
+	clear_screen();
 
 	if ((*n) == 0) {
 		printf("--------------------------\n");
@@ -406,7 +418,7 @@ void iniciar_compra (produto *p, int *n)
 	}
 
 	while(1) {
-		system("clear");
+		clear_screen();
 		printf("\t\tCARRINHO\n");
 		printf("----------------------------------------\n");
 		printf("Insira ID '0' para encerrar compra\n");
@@ -417,8 +429,8 @@ void iniciar_compra (produto *p, int *n)
 
 		if (aux == 0) {
 			if ( qtd_compra == 0) return;
-			system("clear");
-			system("clear");
+			clear_screen();
+			clear_screen();
 			printf("Produto\t\t\t| Quantidade\t|  Valor Und.\t|  Valor Total\n");
 			printf("-----------------------------------------------------------------------\n");
 			for(i = 0; i < (c); i++) {
@@ -514,7 +526,7 @@ void iniciar_compra (produto *p, int *n)
 void encerra_programa (produto *p)
 {
 	free(p);
-	system("clear");
+	clear_screen();
     printf("Volte sempre!\n");
     exit(0);
 }
@@ -558,7 +570,7 @@ void menu_produtos (produto *p, int *n)
 				//main();
 
 			default:
-				system("clear");
+				clear_screen();
 				printf("Opção Inválida!\n");
 				printf("\nPrecione ENTER para voltar\n");
 				getchar();
@@ -587,7 +599,7 @@ void menu_principal (produto *p, int *n)
 				break;
 
 			case '3' :
-				system("clear");
+				clear_screen();
 				em_construcao();
 				break;
 
@@ -596,7 +608,7 @@ void menu_principal (produto *p, int *n)
     			break;
 
     		default:
-	    		system("clear");
+	    		clear_screen();
 	    		printf("Opção Inválida!\n");
 	    		printf("\nPrecione ENTER para voltar\n");
 	    		getchar();
