@@ -564,6 +564,7 @@ void menu_produtos (produto *p, int *n)
 
 			case '9' :
 				menu_principal(p, n);
+				break;
 				
 			default:
 				clear_screen();
