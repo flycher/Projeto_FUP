@@ -20,7 +20,7 @@ void menu_produtos (produto *p, int *n)
 {
 	char opcao;
 
-	while (opcao != '9') {
+	while (1) {
 		interface_menu_produtos();
 		scanf(" %c", &opcao);
 
