@@ -48,11 +48,8 @@ void menu_produtos (produto *p, int *n)
 
 			case '9' :
 				menu_principal(p, n);
-				//break;
-				//return;
-				//return main();
-				//main();
-
+				break;
+				
 			default:
 				clear_screen();
 				printf("Opção Inválida!\n");
