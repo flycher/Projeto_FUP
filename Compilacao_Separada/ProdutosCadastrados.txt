@@ -13,9 +13,6 @@ Cotonete
 5
 Enxaguante Bucal
 5.500000
-6
-Condicionador
-6.500000
 7
 Pente
 1.250000
@@ -34,9 +31,6 @@ Leite em Pó
 12
 Açucar
 3.200000
-13
-Achocolatado
-5.500000
-15
-TESTE TESTE
-1.250000
+6
+Algodão
+0.500000

@@ -17,25 +17,13 @@ typedef struct{
     float quantidade;
 } carrinho;
 
-//limpa o terminal no linux e windows
-void clear_screen()
-{
-	#ifdef _WIN32
-	system("cls");
-	#endif
-
-	#ifdef linux
-	system("clear");
-	#endif	
-}
-
 //simular carregamento na abertura do programa(nao essencial ao programa)
 void carregando()
 {
 	int x, carregado = 0;
 
 	while ( carregado < 106) {
-    	clear_screen();
+    	limpa_tela();
     	printf("\tBEM VINDO!");
     	if (carregado <= 100) printf("\n\n\nCarregando: %d / 100.\n", carregado);
     	   else printf("\n\n\nCarregando: 100 / 100.\n");
@@ -52,6 +40,18 @@ void carregando()
 
 }
 
+//limpa o terminal no linux e windows
+void limpa_tela()
+{
+	#ifdef _WIN32
+	system("cls");
+	#endif
+
+	#ifdef linux
+	system("clear");
+	#endif
+}
+
 //funcao para calcular os espacos ao imprimir o nome dos produtos na finalizaçao da compra
 void espacamento_tabela(char* nome, int espaco)
 {
@@ -60,14 +60,21 @@ void espacamento_tabela(char* nome, int espaco)
 	for( i = 0; i < (espaco - n); i++)	printf(" ");
  }
 
+ //funcao para imprimir os tracos na interface
+ void separacao_traco(int traco)
+ {
+ 	int i;
+ 	for(i = 0; i < traco; i++) printf("-");
+ }
+
 //funcao para imprimir funcionalidades ainda nao implementadas
 void em_construcao()
 {
-	clear_screen();
-	clear_screen();
-	printf("----------------------------\n");
-	printf("--Área em Desenvolvimento--");
-	printf("\n----------------------------\n");
+	limpa_tela();
+	limpa_tela();
+	separacao_traco(28);
+	printf("\n--Área em Desenvolvimento--\n");
+	separacao_traco(28);
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
@@ -76,8 +83,8 @@ void em_construcao()
 //funcao para imprimir o menu principal
 void interface_menu_principal ()
 {
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 	printf("\t--MENU INICIAL--\t%s\n\n", __DATE__);
 	printf(" [1] - Controle de Produtos.\n");
 	printf(" [2] - Iniciar Compra.\n");
@@ -89,8 +96,8 @@ void interface_menu_principal ()
 //funcao para imprimir o menu de produtos
 void interface_menu_produtos ()
 {
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 	printf("\t--CONTROLE DE PRODUTOS--\t%s\n\n", __DATE__);
 	printf(" [1] - Cadastrar Produto.\n");
 	printf(" [2] - Atualizar Produto.\n");
@@ -153,19 +160,19 @@ void produto_para_arquivo(produto vetor[], int n)
 //funcao para cadastrar produto
 produto* cadastra_produto (produto *p, int *n)
 {
-	clear_screen();
+	limpa_tela();
 
 	int i;
 	produto auxiliar;
     printf("--CADASTRO DE PRODUTO--\n");
-	printf("-----------------------\n");
-    printf("Insira a ID: ");
+	separacao_traco(23);
+    printf("\nInsira a ID: ");
 	scanf(" %d", &auxiliar.id);
 
 	if (auxiliar.id == 0) {
-		printf("\n-------------------------------\n");
-		printf("ID '0' reservado pelo sistema.");
-		printf("\n-------------------------------\n");
+		separacao_traco(31);
+		printf("\nID '0' reservado pelo sistema.\n");
+		separacao_traco(31);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -174,9 +181,9 @@ produto* cadastra_produto (produto *p, int *n)
 
 	for (i = 0; i < (*n); i++) {
 		if (auxiliar.id == p[i].id) {
-			printf("\n-----------------------\n");
-			printf("Código ID já cadastrado!\n");
-			printf("-----------------------\n");
+			separacao_traco(24);
+			printf("\nCódigo ID já cadastrado!\n");
+			separacao_traco(24);
 			printf("\nPrecione ENTER para voltar\n");
 			getchar();
 			getchar();
@@ -210,13 +217,13 @@ produto* cadastra_produto (produto *p, int *n)
 //funcao para atualizar produto
 void atualiza_produto (produto *p, int *n)
 {
-	 clear_screen();
-	 clear_screen();
+	 limpa_tela();
+	 limpa_tela();
 
 	 if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -224,19 +231,19 @@ void atualiza_produto (produto *p, int *n)
 	 }
 
 	int i, aux, cont = 0;
-	clear_screen();
-	clear_screen();
-	printf("--ATUALIZAÇÃO DE PRODUTO--\n");
-	printf("---------------------------------\n");
-    printf("Insira o Código ID do Produto: ");
+	limpa_tela();
+	limpa_tela();
+	printf("-----ATUALIZAÇÃO DE PRODUTO------\n");
+	separacao_traco(33);
+    printf("\nInsira o Código ID do Produto: ");
 	scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("---------------------------------\n");
-            printf(" Nome: %s\n", p[i].nome );
+			separacao_traco(33);
+            printf("\n Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
-			printf("---------------------------------\n");
+			separacao_traco(33);
             printf("\nInsira o novo Nome do Produto: ");
             scanf("\n%30[^\n]", p[i].nome);
             printf("Insira o novo Preço do Produto: R$ ");
@@ -248,13 +255,13 @@ void atualiza_produto (produto *p, int *n)
     produto_para_arquivo(p, (*n));
 
     if (cont == 0) {
-		printf("\n-----------------------\n");
-		printf("Produto não Encontrado!\n");
+		separacao_traco(23);
+		printf("\nProduto não Encontrado!\n");
 	}	else {
-			printf("\n-----------------------\n");
-			printf("  Produto Atualizado!\n");
+			separacao_traco(23);
+			printf("\n  Produto Atualizado!\n");
 		}
-    printf("-----------------------\n");
+    separacao_traco(23);
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
@@ -263,13 +270,13 @@ void atualiza_produto (produto *p, int *n)
 //funcao para remover produto
 produto* remove_produto(produto *p, int *n)
 {
-     clear_screen();
-	 clear_screen();
+     limpa_tela();
+	 limpa_tela();
 
 	 if ((*n) == 0) {
-		printf("--------------------------\n");
- 		printf("Nenhum Produto Registrado!");
- 		printf("\n--------------------------\n");
+		separacao_traco(26);
+ 		printf("\nNenhum Produto Registrado!\n");
+ 		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -277,14 +284,14 @@ produto* remove_produto(produto *p, int *n)
 	 }
 
      int i, aux, cont = 0;
-	 printf("--REMOÇÃO DE PRODUTO--\n");
- 	printf("---------------------------------\n");
-     printf("Insira o Código ID do Produto: ");
+	 printf("--------REMOÇÃO DE PRODUTO-------\n");
+ 	 separacao_traco(33);
+     printf("\nInsira o Código ID do Produto: ");
      scanf("%d", &aux);
      for (i = 0; i < (*n); i++) {
          if (aux == p[i].id) {
-			 printf("---------------------------------\n");
-             printf(" Nome: %s\n", p[i].nome );
+			 separacao_traco(33);
+             printf("\n Nome: %s\n", p[i].nome );
      		 printf(" Preco: RS %.2f\n", p[i].preco);
              p[i] = p[(*n) - 1];
              p = (produto*) realloc(p, (*n-1) * sizeof(produto));
@@ -293,13 +300,13 @@ produto* remove_produto(produto *p, int *n)
     }
 
     if (cont == 0) {
-			printf("\n-----------------------\n");
-			printf("Produto não Encontrado!\n");
+			separacao_traco(23);
+			printf("\nProduto não Encontrado!\n");
 	}	else {
-		printf("\n-----------------------\n");
-		printf("  Produto Removido!\n");
+			separacao_traco(23);
+			printf("\n  Produto Removido!\n");
 		}
-    printf("-----------------------\n");
+    separacao_traco(23);
  	printf("\nPrecione ENTER para voltar\n");
  	getchar();
  	getchar();
@@ -315,39 +322,39 @@ void consulta_produto (produto *p, int *n)
 {
 
 	int i, aux, cont = 0;
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 
 	if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
 		return;
 	}
 
-	printf("--CONSULTA DE PRODUTO--\n");
-	printf("---------------------------------\n");
-    printf("Insira o Código ID do Produto: ");
+	printf("-------CONSULTA DE PRODUTO-------\n");
+	separacao_traco(33);
+    printf("\nInsira o Código ID do Produto: ");
     scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("---------------------------------\n");
-            printf(" Nome: %s\n", p[i].nome );
+			separacao_traco(33);
+            printf("\n Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
     		cont++;
         }
     }
 
     if (cont == 0) {
-			printf("\n-----------------------\n");
-			printf("Produto não Encontrado!\n");
+		separacao_traco(23);
+			printf("\nProduto não Encontrado!\n");
 	}
 
-    printf("-----------------------\n");
+    separacao_traco(26);
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
@@ -357,14 +364,14 @@ void consulta_produto (produto *p, int *n)
 void imprime_produtos (produto *p, int *n)
 {
 	int i, j;
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 
 	//caso o arquivo nao tenha nenhum produto cadastrado
 	if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -384,12 +391,13 @@ void imprime_produtos (produto *p, int *n)
 	}
 
 	//imprime todos os produtos cadastrados
-	printf("\t--LISTA DE PRODUTOS --\n\n--------------------------\n");
+	printf("----LISTA DE PRODUTOS-----\n");
+	separacao_traco(26);
 	for(i = 0; i < (*n); i++){
-        		printf(" Id: %d\n", p[i].id);
+        		printf("\n Id: %d\n", p[i].id);
         		printf(" Nome: %s\n", p[i].nome );
         		printf(" Preco: RS %.2f\n", p[i].preco);
-        		printf("-----------------------\n");
+        		separacao_traco(26);
     }
 
 	printf("\nPrecione ENTER para voltar\n");
@@ -404,13 +412,13 @@ void iniciar_compra (produto *p, int *n)
 	float total_compra = 0, troco, qtd_compra = 0, qtd_produtos = 0;
 	carrinho *compra;
 
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 
 	if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -418,21 +426,22 @@ void iniciar_compra (produto *p, int *n)
 	}
 
 	while(1) {
-		clear_screen();
+		limpa_tela();
 		printf("\t\tCARRINHO\n");
-		printf("----------------------------------------\n");
-		printf("Insira ID '0' para encerrar compra\n");
+		separacao_traco(40);
+		printf("\nInsira ID '0' para encerrar compra\n");
 		printf("Total parcial R$ %.2f\n", total_compra);
-		printf("----------------------------------------\n");
-		printf("Insira ID do produto.\n");
+		separacao_traco(40);
+		printf("\nInsira ID do produto.\n");
 		scanf(" %d", &aux);
 
 		if (aux == 0) {
 			if ( qtd_compra == 0) return;
-			clear_screen();
-			clear_screen();
+			limpa_tela();
+			limpa_tela();
 			printf("Produto\t\t\t| Quantidade\t|  Valor Und.\t|  Valor Total\n");
-			printf("-----------------------------------------------------------------------\n");
+			separacao_traco(70);
+			printf("\n");
 			for(i = 0; i < (c); i++) {
 				printf("%s", compra[i].nome);
 				espacamento_tabela(compra[i].nome, 30);
@@ -440,10 +449,10 @@ void iniciar_compra (produto *p, int *n)
 				printf("    R$ %.2f\t   R$ %.2lf\n",compra[i].preco, compra[i].preco * compra[i].quantidade);
 			}
 
-			printf("-----------------------------------------------------------------------\n");
-			printf("Total\t\t\t|\t%.0f\t|\t\t|  R$ %.2f\n", qtd_compra, total_compra);
-			printf("-----------------------------------------------------------------------\n");
-			printf("Valor recebido = R$ ");
+			separacao_traco(70);
+			printf("\nTotal\t\t\t|\t%.0f\t|\t\t|  R$ %.2f\n", qtd_compra, total_compra);
+			separacao_traco(70);
+			printf("\nValor recebido = R$ ");
 			scanf(" %f", &troco);
 			if ((troco == 0) || (troco - total_compra) < 0 ) {
 				printf("\nCompra cancelada.\n");
@@ -455,12 +464,14 @@ void iniciar_compra (produto *p, int *n)
 			}
 
 			troco -= total_compra;
-			printf("Troco = R$ %.2f", troco);
+			printf("Troco = R$ %.2f\n", troco);
+			separacao_traco(70);
+			printf("\n%s\t%s\n", __DATE__, __TIME__);
 			printf("\nObrigado pela preferencia, volte sempre!\n");
 			//aqui coloca a funcao para mandar os dados da compra para o arquivo
 			free(compra);
-			printf("------------------------------------------------------\n");
-			printf("\nPrecione ENTER para voltar ao menu principal\n");
+			separacao_traco(70);
+			printf("\n\nPrecione ENTER para voltar ao menu principal\n");
 			getchar();
 			getchar();
 			break;
@@ -513,8 +524,10 @@ void iniciar_compra (produto *p, int *n)
 		}
 
 		if (!teste1 && !teste2) {
-			printf("\nID não encontrado.\n");
-			printf("Precione ENTER para continuar");
+			separacao_traco(18);
+			printf("\nID não encontrado\n");
+			separacao_traco(18);
+			printf("\nPrecione ENTER para continuar");
 			getchar();
 			getchar();
 		}
@@ -526,7 +539,7 @@ void iniciar_compra (produto *p, int *n)
 void encerra_programa (produto *p)
 {
 	free(p);
-	clear_screen();
+	limpa_tela();
     printf("Volte sempre!\n");
     exit(0);
 }
@@ -565,9 +578,9 @@ void menu_produtos (produto *p, int *n)
 			case '9' :
 				menu_principal(p, n);
 				break;
-				
+
 			default:
-				clear_screen();
+				limpa_tela();
 				printf("Opção Inválida!\n");
 				printf("\nPrecione ENTER para voltar\n");
 				getchar();
@@ -596,7 +609,7 @@ void menu_principal (produto *p, int *n)
 				break;
 
 			case '3' :
-				clear_screen();
+				limpa_tela();
 				em_construcao();
 				break;
 
@@ -605,7 +618,7 @@ void menu_principal (produto *p, int *n)
     			break;
 
     		default:
-	    		clear_screen();
+	    		limpa_tela();
 	    		printf("Opção Inválida!\n");
 	    		printf("\nPrecione ENTER para voltar\n");
 	    		getchar();
@@ -614,13 +627,14 @@ void menu_principal (produto *p, int *n)
 	}
 }
 
+//funcao principal
 int main()
 {
 	int qtd = 0;
 
 	produto *mercadoria = 0;
 
-    carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
+    //carregando();
 
 	mercadoria = ler_arquivo_produtos(mercadoria, &qtd);   //le os dados do arquivo
 	menu_principal(mercadoria, &qtd); //chama menu principal

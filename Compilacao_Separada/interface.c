@@ -7,7 +7,7 @@
 #include "caixa.h"
 
 //limpa o terminal no linux e windows
-void clear_screen()
+void limpa_tela()
 {
 	#ifdef _WIN32
 	system("cls");
@@ -24,7 +24,7 @@ void carregando()
 	int x, carregado = 0;
 
 	while ( carregado < 106) {
-    	clear_screen();
+    	limpa_tela();
     	printf("\tBEM VINDO!");
     	if (carregado <= 100) printf("\n\n\nCarregando: %d / 100.\n", carregado);
     	   else printf("\n\n\nCarregando: 100 / 100.\n");
@@ -49,24 +49,31 @@ void espacamento_tabela(char* nome, int espaco)
 	for( i = 0; i < (espaco - n); i++)	printf(" ");
  }
 
+ //funcao para imprimir os tracos na interface
+void separacao_traco(int traco)
+{
+	int i;
+	for(i = 0; i < traco; i++) printf("-");
+}
+
 //funcao para imprimir funcionalidades ainda nao implementadas
 void em_construcao()
 {
-	clear_screen();
-	clear_screen();
-	printf("----------------------------\n");
-	printf("--Área em Desenvolvimento--");
-	printf("\n----------------------------\n");
+	limpa_tela();
+	limpa_tela();
+	separacao_traco(27);
+	printf("\n--Área em Desenvolvimento--\n");
+	separacao_traco(27);
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
 }
 
 //funcao para imprimir o menu principal
-void interface_menu_principal ()
+void interface_menu_principal()
 {
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 	printf("\t--MENU INICIAL--\t%s\n\n", __DATE__);
 	printf(" [1] - Controle de Produtos.\n");
 	printf(" [2] - Iniciar Compra.\n");
@@ -76,10 +83,10 @@ void interface_menu_principal ()
 }
 
 //funcao para imprimir o menu de produtos
-void interface_menu_produtos ()
+void interface_menu_produtos()
 {
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 	printf("\t--CONTROLE DE PRODUTOS--\t%s\n\n", __DATE__);
 	printf(" [1] - Cadastrar Produto.\n");
 	printf(" [2] - Atualizar Produto.\n");

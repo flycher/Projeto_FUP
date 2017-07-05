@@ -10,13 +10,14 @@
 #include "opcoes.h"
 #include "caixa.h"
 
+//funcao principal
 int main()
 {
 	int qtd = 0;
 
 	produto *mercadoria = 0;
 
-    carregando(); //nao estou utilizando devido ao tempo de espera que a funcao adiciona
+    //carregando();
 
 	mercadoria = ler_arquivo_produtos(mercadoria, &qtd);   //le os dados do arquivo
 	menu_principal(mercadoria, &qtd); //chama menu principal

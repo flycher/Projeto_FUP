@@ -1,4 +1,4 @@
-//estrutura para funcao de compras
+//estrutura para funcao de compra
 typedef struct{
 	int id;
     char nome[31];
@@ -7,4 +7,4 @@ typedef struct{
 } carrinho;
 
 //funcao para registrar compra
-void iniciar_compra (produto *p, int *n);
+void iniciar_compra(produto *p, int *n);

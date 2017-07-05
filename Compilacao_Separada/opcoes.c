@@ -7,16 +7,16 @@
 #include "caixa.h"
 
 //funcao para encerrar programa
-void encerra_programa (produto *p)
+void encerra_programa(produto *p)
 {
 	free(p);
-	clear_screen();
+	limpa_tela();
     printf("Volte sempre!\n");
     exit(0);
 }
 
 //funcao para menu de produtos
-void menu_produtos (produto *p, int *n)
+void menu_produtos(produto *p, int *n)
 {
 	char opcao;
 
@@ -49,9 +49,9 @@ void menu_produtos (produto *p, int *n)
 			case '9' :
 				menu_principal(p, n);
 				break;
-				
+
 			default:
-				clear_screen();
+				limpa_tela();
 				printf("Opção Inválida!\n");
 				printf("\nPrecione ENTER para voltar\n");
 				getchar();
@@ -62,7 +62,7 @@ void menu_produtos (produto *p, int *n)
 }
 
 //funcao para menu principal
-void menu_principal (produto *p, int *n)
+void menu_principal(produto *p, int *n)
 {
 	char opcao;
 
@@ -80,7 +80,7 @@ void menu_principal (produto *p, int *n)
 				break;
 
 			case '3' :
-				clear_screen();
+				limpa_tela();
 				em_construcao();
 				break;
 
@@ -89,7 +89,7 @@ void menu_principal (produto *p, int *n)
     			break;
 
     		default:
-	    		clear_screen();
+	    		limpa_tela();
 	    		printf("Opção Inválida!\n");
 	    		printf("\nPrecione ENTER para voltar\n");
 	    		getchar();

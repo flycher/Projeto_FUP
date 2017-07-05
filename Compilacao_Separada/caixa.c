@@ -7,19 +7,19 @@
 #include "caixa.h"
 
 //funcao para registrar compra
-void iniciar_compra (produto *p, int *n)
+void iniciar_compra(produto *p, int *n)
 {
 	int i, c = 0, aux, teste1, teste2;
 	float total_compra = 0, troco, qtd_compra = 0, qtd_produtos = 0;
 	carrinho *compra;
 
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 
 	if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -27,21 +27,22 @@ void iniciar_compra (produto *p, int *n)
 	}
 
 	while(1) {
-		clear_screen();
+		limpa_tela();
 		printf("\t\tCARRINHO\n");
-		printf("----------------------------------------\n");
-		printf("Insira ID '0' para encerrar compra\n");
+		separacao_traco(40);
+		printf("\nInsira ID '0' para encerrar compra\n");
 		printf("Total parcial R$ %.2f\n", total_compra);
-		printf("----------------------------------------\n");
-		printf("Insira ID do produto.\n");
+		separacao_traco(40);
+		printf("\nInsira ID do produto.\n");
 		scanf(" %d", &aux);
 
 		if (aux == 0) {
 			if ( qtd_compra == 0) return;
-			clear_screen();
-			clear_screen();
+			limpa_tela();
+			limpa_tela();
 			printf("Produto\t\t\t| Quantidade\t|  Valor Und.\t|  Valor Total\n");
-			printf("-----------------------------------------------------------------------\n");
+			separacao_traco(70);
+			printf("\n");
 			for(i = 0; i < (c); i++) {
 				printf("%s", compra[i].nome);
 				espacamento_tabela(compra[i].nome, 30);
@@ -49,10 +50,10 @@ void iniciar_compra (produto *p, int *n)
 				printf("    R$ %.2f\t   R$ %.2lf\n",compra[i].preco, compra[i].preco * compra[i].quantidade);
 			}
 
-			printf("-----------------------------------------------------------------------\n");
-			printf("Total\t\t\t|\t%.0f\t|\t\t| R$ %.2f\n", qtd_compra, total_compra);
-			printf("-----------------------------------------------------------------------\n");
-			printf("Valor recebido = R$ ");
+			separacao_traco(70);
+			printf("\nTotal\t\t\t|\t%.0f\t|\t\t|  R$ %.2f\n", qtd_compra, total_compra);
+			separacao_traco(70);
+			printf("\nValor recebido = R$ ");
 			scanf(" %f", &troco);
 			if ((troco == 0) || (troco - total_compra) < 0 ) {
 				printf("\nCompra cancelada.\n");
@@ -64,12 +65,14 @@ void iniciar_compra (produto *p, int *n)
 			}
 
 			troco -= total_compra;
-			printf("Troco = R$ %.2f", troco);
+			printf("Troco = R$ %.2f\n", troco);
+			separacao_traco(70);
+			printf("\n%s\t%s\n", __DATE__, __TIME__);
 			printf("\nObrigado pela preferencia, volte sempre!\n");
 			//aqui coloca a funcao para mandar os dados da compra para o arquivo
 			free(compra);
-			printf("------------------------------------------------------\n");
-			printf("\nPrecione ENTER para voltar ao menu principal\n");
+			separacao_traco(70);
+			printf("\n\nPrecione ENTER para voltar ao menu principal\n");
 			getchar();
 			getchar();
 			break;
@@ -122,8 +125,10 @@ void iniciar_compra (produto *p, int *n)
 		}
 
 		if (!teste1 && !teste2) {
-			printf("\nID não encontrado.\n");
-			printf("Precione ENTER para continuar");
+			separacao_traco(18);
+			printf("\nID não encontrado\n");
+			separacao_traco(18);
+			printf("\nPrecione ENTER para continuar");
 			getchar();
 			getchar();
 		}

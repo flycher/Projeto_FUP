@@ -7,7 +7,7 @@
 #include "caixa.h"
 
 //funcao para ler os dados do arquivo
-produto* ler_arquivo_produtos (produto *p, int *n)
+produto* ler_arquivo_produtos(produto *p, int *n)
 {
     int i = 0;
 	produto auxiliar;
@@ -55,21 +55,21 @@ void produto_para_arquivo(produto vetor[], int n)
 }
 
 //funcao para cadastrar produto
-produto* cadastra_produto (produto *p, int *n)
+produto* cadastra_produto(produto *p, int *n)
 {
-	clear_screen();
+	limpa_tela();
 
 	int i;
 	produto auxiliar;
     printf("--CADASTRO DE PRODUTO--\n");
-	printf("-----------------------\n");
-    printf("Insira a ID: ");
+	separacao_traco(23);
+    printf("\nInsira a ID: ");
 	scanf(" %d", &auxiliar.id);
 
 	if (auxiliar.id == 0) {
-		printf("\n-------------------------------\n");
-		printf("ID '0' reservado pelo sistema.");
-		printf("\n-------------------------------\n");
+		separacao_traco(31);
+		printf("\nID '0' reservado pelo sistema.\n");
+		separacao_traco(31);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -78,9 +78,9 @@ produto* cadastra_produto (produto *p, int *n)
 
 	for (i = 0; i < (*n); i++) {
 		if (auxiliar.id == p[i].id) {
-			printf("\n-----------------------\n");
-			printf("Código ID já cadastrado!\n");
-			printf("-----------------------\n");
+			separacao_traco(24);
+			printf("\nCódigo ID já cadastrado!\n");
+			separacao_traco(24);
 			printf("\nPrecione ENTER para voltar\n");
 			getchar();
 			getchar();
@@ -112,15 +112,15 @@ produto* cadastra_produto (produto *p, int *n)
 }
 
 //funcao para atualizar produto
-void atualiza_produto (produto *p, int *n)
+void atualiza_produto(produto *p, int *n)
 {
-	 clear_screen();
-	 clear_screen();
+	 limpa_tela();
+	 limpa_tela();
 
 	 if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -128,19 +128,19 @@ void atualiza_produto (produto *p, int *n)
 	 }
 
 	int i, aux, cont = 0;
-	clear_screen();
-	clear_screen();
-	printf("--ATUALIZAÇÃO DE PRODUTO--\n");
-	printf("---------------------------------\n");
-    printf("Insira o Código ID do Produto: ");
+	limpa_tela();
+	limpa_tela();
+	printf("-----ATUALIZAÇÃO DE PRODUTO------\n");
+	separacao_traco(33);
+    printf("\nInsira o Código ID do Produto: ");
 	scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("---------------------------------\n");
-            printf(" Nome: %s\n", p[i].nome );
+			separacao_traco(33);
+            printf("\n Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
-			printf("---------------------------------\n");
+			separacao_traco(33);
             printf("\nInsira o novo Nome do Produto: ");
             scanf("\n%30[^\n]", p[i].nome);
             printf("Insira o novo Preço do Produto: R$ ");
@@ -152,13 +152,13 @@ void atualiza_produto (produto *p, int *n)
     produto_para_arquivo(p, (*n));
 
     if (cont == 0) {
-		printf("\n-----------------------\n");
-		printf("Produto não Encontrado!\n");
+		separacao_traco(23);
+		printf("\nProduto não Encontrado!\n");
 	}	else {
-			printf("\n-----------------------\n");
-			printf("  Produto Atualizado!\n");
+			separacao_traco(23);
+			printf("\n  Produto Atualizado!\n");
 		}
-    printf("-----------------------\n");
+    separacao_traco(23);
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
@@ -167,13 +167,13 @@ void atualiza_produto (produto *p, int *n)
 //funcao para remover produto
 produto* remove_produto(produto *p, int *n)
 {
-     clear_screen();
-	 clear_screen();
+     limpa_tela();
+	 limpa_tela();
 
 	 if ((*n) == 0) {
-		printf("--------------------------\n");
- 		printf("Nenhum Produto Registrado!");
- 		printf("\n--------------------------\n");
+		separacao_traco(26);
+ 		printf("\nNenhum Produto Registrado!\n");
+ 		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -181,14 +181,14 @@ produto* remove_produto(produto *p, int *n)
 	 }
 
      int i, aux, cont = 0;
-	 printf("--REMOÇÃO DE PRODUTO--\n");
- 	printf("---------------------------------\n");
-     printf("Insira o Código ID do Produto: ");
+	 printf("--------REMOÇÃO DE PRODUTO-------\n");
+ 	 separacao_traco(33);
+     printf("\nInsira o Código ID do Produto: ");
      scanf("%d", &aux);
      for (i = 0; i < (*n); i++) {
          if (aux == p[i].id) {
-			 printf("---------------------------------\n");
-             printf(" Nome: %s\n", p[i].nome );
+			 separacao_traco(33);
+             printf("\n Nome: %s\n", p[i].nome );
      		 printf(" Preco: RS %.2f\n", p[i].preco);
              p[i] = p[(*n) - 1];
              p = (produto*) realloc(p, (*n-1) * sizeof(produto));
@@ -197,13 +197,13 @@ produto* remove_produto(produto *p, int *n)
     }
 
     if (cont == 0) {
-			printf("\n-----------------------\n");
-			printf("Produto não Encontrado!\n");
+			separacao_traco(23);
+			printf("\nProduto não Encontrado!\n");
 	}	else {
-		printf("\n-----------------------\n");
-		printf("  Produto Removido!\n");
+			separacao_traco(23);
+			printf("\n  Produto Removido!\n");
 		}
-    printf("-----------------------\n");
+    separacao_traco(23);
  	printf("\nPrecione ENTER para voltar\n");
  	getchar();
  	getchar();
@@ -215,43 +215,43 @@ produto* remove_produto(produto *p, int *n)
 }
 
 //funcao para consultar produto
-void consulta_produto (produto *p, int *n)
+void consulta_produto(produto *p, int *n)
 {
 
 	int i, aux, cont = 0;
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 
 	if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
 		return;
 	}
 
-	printf("--CONSULTA DE PRODUTO--\n");
-	printf("---------------------------------\n");
-    printf("Insira o Código ID do Produto: ");
+	printf("-------CONSULTA DE PRODUTO-------\n");
+	separacao_traco(33);
+    printf("\nInsira o Código ID do Produto: ");
     scanf("%d", &aux);
 
 	for(i = 0; i < (*n); i++){
 		if (aux == p[i].id) {
-			printf("---------------------------------\n");
-            printf(" Nome: %s\n", p[i].nome );
+			separacao_traco(33);
+            printf("\n Nome: %s\n", p[i].nome );
     		printf(" Preco: RS %.2f\n", p[i].preco);
     		cont++;
         }
     }
 
     if (cont == 0) {
-			printf("\n-----------------------\n");
-			printf("Produto não Encontrado!\n");
+		separacao_traco(23);
+			printf("\nProduto não Encontrado!\n");
 	}
 
-    printf("-----------------------\n");
+    separacao_traco(26);
 	printf("\nPrecione ENTER para voltar\n");
 	getchar();
 	getchar();
@@ -261,14 +261,14 @@ void consulta_produto (produto *p, int *n)
 void imprime_produtos (produto *p, int *n)
 {
 	int i, j;
-	clear_screen();
-	clear_screen();
+	limpa_tela();
+	limpa_tela();
 
 	//caso o arquivo nao tenha nenhum produto cadastrado
 	if ((*n) == 0) {
-		printf("--------------------------\n");
-		printf("Nenhum Produto Registrado!");
-		printf("\n--------------------------\n");
+		separacao_traco(26);
+		printf("\nNenhum Produto Registrado!\n");
+		separacao_traco(26);
 		printf("\nPrecione ENTER para voltar\n");
 		getchar();
 		getchar();
@@ -288,12 +288,13 @@ void imprime_produtos (produto *p, int *n)
 	}
 
 	//imprime todos os produtos cadastrados
-	printf("\t--LISTA DE PRODUTOS --\n\n--------------------------\n");
+	printf("----LISTA DE PRODUTOS-----\n");
+	separacao_traco(26);
 	for(i = 0; i < (*n); i++){
-        		printf(" Id: %d\n", p[i].id);
+        		printf("\n Id: %d\n", p[i].id);
         		printf(" Nome: %s\n", p[i].nome );
         		printf(" Preco: RS %.2f\n", p[i].preco);
-        		printf("-----------------------\n");
+        		separacao_traco(26);
     }
 
 	printf("\nPrecione ENTER para voltar\n");

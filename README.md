@@ -15,9 +15,9 @@ Sistema de supermercado
 
  ● Caixa [✓]
 
- ● Relatório de Vendas [ ]
+ ● Relatório de Vendas [  ]
 
- ● Salvar Vendas em Arquivo [ ]
+ ● Salvar Vendas em Arquivo [  ]
 
  ● Interface Vendas [✓]
 
