@@ -5,8 +5,9 @@
 #include "produtos.h"
 #include "opcoes.h"
 #include "caixa.h"
+#include "relatorio.h"
 
-//limpa o terminal no linux e windows
+//limpa o terminal no linux ou windows
 void limpa_tela()
 {
 	#ifdef _WIN32
@@ -18,27 +19,28 @@ void limpa_tela()
 	#endif
 }
 
-//simular carregamento na abertura do programa(nao essencial ao programa)
+//simula um carregando do programa
 void carregando()
 {
 	int x, carregado = 0;
 
 	while ( carregado < 106) {
     	limpa_tela();
-    	printf("\tBEM VINDO!");
-    	if (carregado <= 100) printf("\n\n\nCarregando: %d / 100.\n", carregado);
-    	   else printf("\n\n\nCarregando: 100 / 100.\n");
+    	printf("\tBEM VINDO!\n");
+
+    	if (carregado <= 100) printf("\n\n\nAbrindo Caixa... %d / 100.\n", carregado);
+    	   else printf("\n\n\nConcluido.\n");
 
         while (1) {
 			if ( carregado < 90 ) x = rand() % 4000000;
-			   else x = rand() % 12000000;
+			   else x = rand() % 18000000;
 			if (x == 1){
+				carregado++;
 				carregado++;
 				break;
 			}
         }
     }
-
 }
 
 //funcao para calcular os espacos ao imprimir o nome dos produtos na finalizaçao da compra
@@ -49,7 +51,7 @@ void espacamento_tabela(char* nome, int espaco)
 	for( i = 0; i < (espaco - n); i++)	printf(" ");
  }
 
- //funcao para imprimir os tracos na interface
+//funcao para imprimir os tracos na interface
 void separacao_traco(int traco)
 {
 	int i;
@@ -76,7 +78,7 @@ void interface_menu_principal()
 	limpa_tela();
 	printf("\t--MENU INICIAL--\t%s\n\n", __DATE__);
 	printf(" [1] - Controle de Produtos.\n");
-	printf(" [2] - Iniciar Compra.\n");
+	printf(" [2] - Iniciar Venda.\n");
 	printf(" [3] - Imprimir Relatorio de Vendas.\n");
 	printf(" [9] - Encerrar Programa.\n");
 	printf("\nO que deseja? ");

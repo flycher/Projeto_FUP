@@ -5,6 +5,7 @@
 #include "produtos.h"
 #include "opcoes.h"
 #include "caixa.h"
+#include "relatorio.h"
 
 //funcao para registrar compra
 void iniciar_compra(produto *p, int *n)
@@ -16,6 +17,7 @@ void iniciar_compra(produto *p, int *n)
 	limpa_tela();
 	limpa_tela();
 
+	//verifica se algum produto esta cadastrado
 	if ((*n) == 0) {
 		separacao_traco(26);
 		printf("\nNenhum Produto Registrado!\n");
@@ -36,13 +38,15 @@ void iniciar_compra(produto *p, int *n)
 		printf("\nInsira ID do produto.\n");
 		scanf(" %d", &aux);
 
+		//ao inserir id '0'
 		if (aux == 0) {
-			if ( qtd_compra == 0) return;
+			if ( qtd_compra == 0) return; //caso nenhum produto tenha sido adicionado sai da funcao
 			limpa_tela();
 			limpa_tela();
 			printf("Produto\t\t\t| Quantidade\t|  Valor Und.\t|  Valor Total\n");
 			separacao_traco(70);
 			printf("\n");
+			//imprime todos os produtos inseridos na compra
 			for(i = 0; i < (c); i++) {
 				printf("%s", compra[i].nome);
 				espacamento_tabela(compra[i].nome, 30);
@@ -51,31 +55,37 @@ void iniciar_compra(produto *p, int *n)
 			}
 
 			separacao_traco(70);
+			//imprime o total de produtos comprados e o total da compra
 			printf("\nTotal\t\t\t|\t%.0f\t|\t\t|  R$ %.2f\n", qtd_compra, total_compra);
 			separacao_traco(70);
 			printf("\nValor recebido = R$ ");
+			 //recebe o dinheiro paga pelo cliente
 			scanf(" %f", &troco);
+			//caso valor seja '0' ou abaixo do total da compra, a compra e cancelada e nao enviada ao relatorio
 			if ((troco == 0) || (troco - total_compra) < 0 ) {
 				printf("\nCompra cancelada.\n");
 				free(compra);
 				printf("\nPrecione ENTER para voltar ao menu principal\n");
 				getchar();
 				getchar();
-				break;
+				return;
 			}
 
+			//calcula a diferenca entre o toral da compra e o valor pago pelo cliente
 			troco -= total_compra;
-			printf("Troco = R$ %.2f\n", troco);
+			printf("Troco = R$ %.2f\n", troco); //imprime a diference entre o valor pago e o total
 			separacao_traco(70);
-			printf("\n%s\t%s\n", __DATE__, __TIME__);
+			printf("\n%s\t%s\n", __DATE__, __TIME__); //imprime na tela o dia e hora da compra
 			printf("\nObrigado pela preferencia, volte sempre!\n");
-			//aqui coloca a funcao para mandar os dados da compra para o arquivo
+			//funcao para mandar os dados da compra para o arquivo de relatorio
+			carrinho_para_relatorio_arquivo(compra, c, qtd_compra, total_compra);
+			//limpa a memoria alocada para os dados da compra
 			free(compra);
 			separacao_traco(70);
 			printf("\n\nPrecione ENTER para voltar ao menu principal\n");
 			getchar();
 			getchar();
-			break;
+			return;
 		}
 
 		//funcao para adicionar quantidade aos produtos que ja estao no carrinho
@@ -89,7 +99,7 @@ void iniciar_compra(produto *p, int *n)
 				compra[i].quantidade += qtd_produtos;
 				qtd_compra += qtd_produtos;
 				total_compra += compra[i].preco * qtd_produtos;
-				teste2 = 1;
+				teste2 = 1; //produto foi encontrado no carrinho
 			}
 		}
 
@@ -97,15 +107,16 @@ void iniciar_compra(produto *p, int *n)
 		teste1 = 0;
 		for(i = 0; ( i < (*n) ) && (!teste2); i++){
 			if (aux == p[i].id) {
-				teste1 = 1;
+				teste1 = 1; //produto foi encontrado nos produtos cadastrados
 				printf(" Nome: %s\n", p[i].nome );
 				printf(" Preco: RS %.2f\n", p[i].preco);
-				qtd_produtos = 1;
 				printf("Insira a quantidade: ");
 				scanf("%f", &qtd_produtos);
+				//caso a quantidade inserida seja '0',ignora o produto e nao aloca memoria para ele
 				if (qtd_produtos == 0) continue;
-				qtd_compra += qtd_produtos;
-				total_compra += p[i].preco * qtd_produtos;
+				qtd_compra += qtd_produtos; //aumenta quantidade de produtos comprados
+				total_compra += p[i].preco * qtd_produtos; //aumenta o total da compra
+				//aloca memoria para guardar os dados do produto comprado
 				if (c == 0) {
 					compra = (carrinho*) malloc(sizeof(carrinho) );
 					(c)++;
@@ -117,6 +128,7 @@ void iniciar_compra(produto *p, int *n)
 							return ;
 						}
 					}
+				 //copia para o produto comprado os dados do produto e a quantidade
 				compra[c-1].id = p[i].id;
 				strcpy(compra[c-1].nome,p[i].nome);
 				compra[c-1].preco = p[i].preco;
@@ -124,6 +136,7 @@ void iniciar_compra(produto *p, int *n)
 			}
 		}
 
+		//caso o produto nao seja encontrado no carrinho ou nos produtoos cadastrados
 		if (!teste1 && !teste2) {
 			separacao_traco(18);
 			printf("\nID não encontrado\n");

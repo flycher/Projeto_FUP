@@ -1,4 +1,4 @@
-//funcao para encerrar programa e liberar a memoria
+//funcao para liberar a memoria e encerrar programa
 void encerra_programa(produto *p);
 
 //funcao para menu de produtos

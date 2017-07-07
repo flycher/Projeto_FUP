@@ -5,13 +5,13 @@ typedef struct{
     float preco;
 } produto;
 
-//funcao para ler os dados do arquivo
+//funcao para ler os dados do arquivo de produtos cadastrados e aloca na memoria
 produto* ler_arquivo_produtos(produto *p, int *n);
 
 //funcao para escrever os dados no arquivo
 void produto_para_arquivo(produto vetor[], int n);
 
-//funcao para cadastra produto
+//funcao para cadastrar produto
 produto* cadastra_produto(produto *p, int *n);
 
 //funcao para atualizar produto

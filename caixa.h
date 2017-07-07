@@ -1,4 +1,4 @@
-//estrutura para funcao de compra
+////estrutura para dados dos produtos do carrinho
 typedef struct{
 	int id;
     char nome[31];

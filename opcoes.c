@@ -5,13 +5,14 @@
 #include "produtos.h"
 #include "opcoes.h"
 #include "caixa.h"
+#include "relatorio.h"
 
-//funcao para encerrar programa
+//funcao para liberar a memoria e encerrar programa
 void encerra_programa(produto *p)
 {
 	free(p);
 	limpa_tela();
-    printf("Volte sempre!\n");
+    printf("Caixa Encerrado!\n");
     exit(0);
 }
 
@@ -24,7 +25,7 @@ void menu_produtos(produto *p, int *n)
 		interface_menu_produtos();
 		scanf(" %c", &opcao);
 
-		switch (opcao) { //opcoes do menu de produtos
+		switch (opcao) {
 
 			case '1' :
 				p = cadastra_produto(p, n);
@@ -70,7 +71,7 @@ void menu_principal(produto *p, int *n)
 		interface_menu_principal();
 		scanf(" %c", &opcao);
 
-		switch (opcao) { //opcoes do menu principal
+		switch (opcao) {
 			case '1' :
 				menu_produtos(p, n);
 				break;
@@ -80,8 +81,7 @@ void menu_principal(produto *p, int *n)
 				break;
 
 			case '3' :
-				limpa_tela();
-				em_construcao();
+				ler_arquivo_relatorio();
 				break;
 
     		case '9' :
