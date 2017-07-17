@@ -164,5 +164,5 @@ void ler_arquivo_relatorio()
 
 	fclose(f);
 	//aponta os locais de memoria em que vetores foram guardados para a funcao imprime_relatorio
-	imprime_relatorio(p, n, dataAuxiliar);
+	imprime_relatorio(p, n, dataProcurada);
 }

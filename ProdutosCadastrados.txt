@@ -37,3 +37,6 @@ Açucar
 13
 Café Instantâneo
 2.250000
+40
+dimdim de uva
+1.000000
