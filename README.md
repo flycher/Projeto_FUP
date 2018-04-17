@@ -24,3 +24,5 @@ Sistema de supermercado
  ● Compilação Separada [✓]
 
   ● Correção de Bugs [✓]
+
+#Equipe: Matheus Xavier, Claro Henrrique
