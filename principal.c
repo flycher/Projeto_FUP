@@ -14,14 +14,14 @@
 //funcao principal
 int main()
 {
-	int qtd = 0;
+    int qtd = 0;
 
-	produto *mercadoria = 0;
+    produto *prods = 0;
 
     carregando(); //simula um carregando do programa, proposito apenas visual
 
-	mercadoria = ler_arquivo_produtos(mercadoria, &qtd); //le os dados do arquivo
-	menu_principal(mercadoria, &qtd); //chama menu principal
+    prods = ler_arquivo_produtos(prods, &qtd); //le os dados do arquivo
+    menu_principal(prods, &qtd); //chama menu principal
 
     return 0;
 }

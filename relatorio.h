@@ -1,3 +1,5 @@
+#include "caixa.h"
+
 //retorna data atual em um inteiro para possibilitar busca no arquivo
 int data_atual();
 
@@ -5,10 +7,10 @@ int data_atual();
 int recebe_data();
 
 //funcao para escrever os dados das compras realizadas no arquivo
-void carrinho_para_relatorio_arquivo(carrinho vetor[], int nTipoItens, float nProdutos, float tCompra);
+void carrinho_para_relatorio_arquivo(carrinho compras[], int nTipoItens, float nProdutos, float tCompra);
 
 //funcao para imprimir o relatorio de vendas a partir da data procurada
-void imprime_relatorio (carrinho *p, int n, int dataCompra);
+void imprime_relatorio (carrinho *compras, int n, int dataCompra);
 
 //le o arquivo de relatorio de vendas e aloca na memoria
 void ler_arquivo_relatorio();

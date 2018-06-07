@@ -1,28 +1,28 @@
+
 # Projeto_FUP
-Sistema de supermercado
 
- ● Cadastro de Produtos [✓]
+## Sistema de supermercado
 
- ● Remoção de Produtos [✓]
+    ● Cadastro de Produtos [✓]
 
- ● Atualização de Produtos [✓]
+    ● Remoção de Produtos [✓]
 
- ● Consulta de Produtos [✓]
+    ● Atualização de Produtos [✓]
 
- ● Interface Produtos [✓]
+    ● Consulta de Produtos [✓]
 
- ● Salvar Produtos em Arquivo [✓]
+    ● Interface Produtos [✓]
 
- ● Vendas [✓]
+    ● Salvar Produtos em Arquivo [✓]
 
- ● Interface Vendas [✓]
+    ● Vendas [✓]
 
- ● Salvar Vendas em Arquivo [✓]
+    ● Interface Vendas [✓]
 
- ● Imprimir Relatório de Vendas [✓]
+    ● Salvar Vendas em Arquivo [✓]
 
- ● Compilação Separada [✓]
+    ● Imprimir Relatório de Vendas [✓]
 
-  ● Correção de Bugs [✓]
+    ● Compilação Separada [✓]
 
-#Equipe: Matheus Xavier, Claro Henrrique
+    ● Correção de Bugs [✓]
