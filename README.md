@@ -26,3 +26,5 @@
     ● Compilação Separada [✓]
 
     ● Correção de Bugs [✓]
+
+Equipe: Claro Henrique, Matheus Xavier
